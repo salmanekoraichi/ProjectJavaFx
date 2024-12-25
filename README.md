@@ -1,6 +1,5 @@
 # School Management System
 
-![Project Banner](https://via.placeholder.com/728x90?text=School+Management+System)
 
 **Année Universitaire**: 2024/2025  
 **Encadré par**: Prof. Mohamed EL HADDAD  
