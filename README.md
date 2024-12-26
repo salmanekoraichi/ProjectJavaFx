@@ -4,7 +4,7 @@
 **Année Universitaire**: 2024/2025  
 **Encadré par**: Prof. Mohamed EL HADDAD  
 **Réalisé par**: [Salmane Koraichi](#)
-
+![System Diagram](diagram.jpg)
 ---
 
 ## 🎯 Project Description
