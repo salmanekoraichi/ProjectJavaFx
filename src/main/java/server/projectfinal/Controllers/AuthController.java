@@ -8,6 +8,9 @@ import java.util.List;
 /**
  * This code is written by Salmane Koraichi
  **/
+
+//Manages login functionality and user roles.
+
 public class AuthController {
     private final UtilisateurService utilisateurService;
 
