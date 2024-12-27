@@ -4,7 +4,7 @@ package server.projectfinal.Controllers;
  * This code is written by Salmane Koraichi
  **/
 
-//Deals with module management in the UI.
+//Displays statistics and overall school information.
 
-public class ModuleController {
+public class DashboardController {
 }
