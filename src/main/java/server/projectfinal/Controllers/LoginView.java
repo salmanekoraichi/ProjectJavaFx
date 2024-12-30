@@ -48,7 +48,7 @@ public class LoginView {
         String dashboardPath = switch (role) {
             case "admin" -> "/server/projectfinal/Views/dashboard-view.fxml";
             case "professor" -> "/server/projectfinal/Views/professeur-view.fxml";
-            case "student" -> "/server/projectfinal/Views/etudiant-view.fxml";
+            case "secretary" -> "/server/projectfinal/Views/secretary-dashboard.fxml";
             default -> null;
         };
 
