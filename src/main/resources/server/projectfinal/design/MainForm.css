@@ -19,8 +19,12 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5,0,0,0);
 }
 
-.main-bg{
-    -fx-background-color: linear-gradient(to bottom right, #274f72, #143650);
+.main-bg {
+    -fx-background-color: linear-gradient(to bottom right, #274f72, #143650); /* Background color */
+    -fx-background-image: url("server/projectfinal/images/tanger.jpeg"); /* Background image */
+    -fx-background-size: cover; /* Ensures the image covers the container */
+    -fx-background-position: center; /* Centers the image */
+    -fx-background-repeat: no-repeat; /* Prevents the image from repeating */
 }
 
 .btn{

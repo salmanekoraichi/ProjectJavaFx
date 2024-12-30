@@ -1,0 +1,11 @@
+.input-field {
+    border: none;
+    border-bottom: 2px solid white;
+}
+
+body {
+    background-image: url("server/projectfinal/images/tanger.jpeg");
+    background-color: #cccccc;
+    background-size: cover;
+    opacity: 0.3;
+}
