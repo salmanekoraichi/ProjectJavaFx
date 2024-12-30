@@ -37,4 +37,8 @@ public class InscriptionsService {
     public List<Etudiant> getEtudiantsForModule(int moduleId) {
         return inscriptionDAO.findEtudiantsByModuleId(moduleId);
     }
+
+    public  List<Inscription> getAllInscriptions(){
+        return inscriptionDAO.findAll();
+    }
 }
