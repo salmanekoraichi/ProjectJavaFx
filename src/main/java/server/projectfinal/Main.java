@@ -12,14 +12,14 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         try {
             // Load the Dashboard FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/server/projectfinal/Views/dashboard-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/server/projectfinal/Views/auth/login-view.fxml"));
             Parent root = loader.load();
 
             // Set the title of the window
             primaryStage.setTitle("Admin Dashboard");
 
             // Set the scene with the loaded FXML
-            primaryStage.setScene(new Scene(root, 1100, 600));
+            primaryStage.setScene(new Scene(root, 400, 500));
 
             // Show the primary stage
             primaryStage.show();

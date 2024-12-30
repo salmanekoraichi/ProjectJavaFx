@@ -1,6 +1,7 @@
 package server.projectfinal.Services;
 
 import server.projectfinal.DAO.UtilisateurDAO;
+import server.projectfinal.DAO.UtilisateurDAOImpl;
 import server.projectfinal.Models.Utilisateur;
 
 import java.util.List;
@@ -10,6 +11,10 @@ import java.util.List;
  **/
 public class UtilisateurService {
     private final UtilisateurDAO utilisateurDAO;
+
+    public UtilisateurService() {
+        this.utilisateurDAO = new UtilisateurDAOImpl();
+    }
 
     public UtilisateurService(UtilisateurDAO utilisateurDAO) {
         this.utilisateurDAO = utilisateurDAO;
