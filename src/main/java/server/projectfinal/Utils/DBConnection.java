@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 public class DBConnection {
     private static DBConnection instance;
     private Connection connection;
-    private final String url = "jdbc:mysql://localhost:3306/Dbjava";
+    private final String url = "jdbc:mysql://localhost:3306/javafinaldb";
     private final String user = "root";
     private final String password = "";
 
