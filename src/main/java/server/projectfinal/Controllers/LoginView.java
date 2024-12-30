@@ -10,7 +10,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import server.projectfinal.Controllers.AuthController;
 import server.projectfinal.Models.Utilisateur;
 import server.projectfinal.Services.UtilisateurService;
 
@@ -47,7 +46,7 @@ public class LoginView {
         // Determine the dashboard path based on the role
         String dashboardPath = switch (role) {
             case "admin" -> "/server/projectfinal/Views/dashboard-view.fxml";
-            case "professor" -> "/server/projectfinal/Views/professeur-view.fxml";
+            case "professor" -> "/server/projectfinal/Views/professeur-management-view.fxml";
             case "student" -> "/server/projectfinal/Views/etudiant-view.fxml";
             default -> null;
         };
