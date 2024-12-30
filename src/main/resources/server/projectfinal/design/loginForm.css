@@ -4,8 +4,8 @@
 }
 
 body {
-    background-image: url("tanger.jpeg");
-    background-color: #cccccc;
-    background-size: cover;
-    opacity: 0.3;
+    -fx-background-image: url("tanger.jpeg"); /* Background image */
+    -fx-background-size: cover; /* Ensures the image covers the container */
+    -fx-background-position: center; /* Centers the image */
+    -fx-background-repeat: no-repeat; /* Prevents the image from repeating */
 }
