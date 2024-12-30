@@ -27,6 +27,9 @@ public class AuthController {
         }
     }
 
+
+
+    //those lines of code give to the admin the posibility to add users by roles
     public void register(String username, String password, String role) {
         Utilisateur utilisateur = new Utilisateur(0, username, password, role);
         try {
