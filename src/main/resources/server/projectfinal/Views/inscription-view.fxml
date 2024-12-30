@@ -5,10 +5,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.projectfinal.Controllers.InscriptionController">
 =======
 <AnchorPane fx:id="SceneContainer" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
 >>>>>>> f021640673e55601403b89483e220da7f7a11677
+=======
+<AnchorPane fx:id="SceneContainer" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+>>>>>>> 25749e1738de01053d83f0601896d011ac40a3fc
    <children>
       <AnchorPane fx:id="TableContainer" layoutX="15.0" layoutY="14.0" prefHeight="454.0" prefWidth="820.0" stylesheets="@../design/MainForm.css" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="14.0">
          <styleClass>

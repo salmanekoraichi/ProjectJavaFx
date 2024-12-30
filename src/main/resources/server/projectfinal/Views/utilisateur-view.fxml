@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.projectfinal.Controllers.DashboardController">
     <children>
         <AnchorPane layoutX="150.0" layoutY="54.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -73,6 +74,8 @@
         </AnchorPane>
     </children>
 =======
+=======
+>>>>>>> 25749e1738de01053d83f0601896d011ac40a3fc
 <AnchorPane fx:id="SceneContainer" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane fx:id="TableContainer" layoutX="15.0" layoutY="14.0" prefHeight="454.0" prefWidth="820.0" stylesheets="@../design/MainForm.css" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="14.0">
@@ -90,5 +93,8 @@
          </children>
       </AnchorPane>
    </children>
+<<<<<<< HEAD
 >>>>>>> f021640673e55601403b89483e220da7f7a11677
+=======
+>>>>>>> 25749e1738de01053d83f0601896d011ac40a3fc
 </AnchorPane>
