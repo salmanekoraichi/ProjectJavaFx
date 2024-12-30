@@ -3,6 +3,7 @@ package server.projectfinal.Services;
 import server.projectfinal.DAO.InscriptionDAO;
 import server.projectfinal.Models.Etudiant;
 import server.projectfinal.Models.Inscription;
+import java.sql.ResultSet;
 
 import java.util.List;
 
@@ -40,5 +41,9 @@ public class InscriptionsService {
 
     public  List<Inscription> getAllInscriptions(){
         return inscriptionDAO.findAll();
+    }
+
+    public ResultSet load(){
+        return inscriptionDAO.load();
     }
 }

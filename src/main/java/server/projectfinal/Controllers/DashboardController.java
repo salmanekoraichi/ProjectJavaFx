@@ -173,56 +173,6 @@ public class DashboardController {
         loadDashboardData();
     }
 
-    /**
-     * Handles the action when the "Étudiants" button is clicked.
-     *
-     * @param event the action event
-     */
-    @FXML
-    private void handleEtudiantsAction(ActionEvent event) {
-        loadView("EtudiantsView.fxml");
-    }
-
-    /**
-     * Handles the action when the "Professeurs" button is clicked.
-     *
-     * @param event the action event
-     */
-    @FXML
-    private void handleProfesseursAction(ActionEvent event) {
-        loadView("ProfesseursView.fxml");
-    }
-
-    /**
-     * Handles the action when the "Modules" button is clicked.
-     *
-     * @param event the action event
-     */
-    @FXML
-    private void handleModulesAction(ActionEvent event) {
-        loadView("ModulesView.fxml");
-    }
-
-    /**
-     * Handles the action when the "Inscriptions" button is clicked.
-     *
-     * @param event the action event
-     */
-    @FXML
-    private void handleInscriptionsAction(ActionEvent event) {
-        loadView("InscriptionsView.fxml");
-    }
-
-    /**
-     * Handles the action when the "Se déconnecter" button is clicked.
-     *
-     * @param event the action event
-     */
-    @FXML
-    private void handleLogoutAction(ActionEvent event) {
-        // Implement logout logic, such as returning to the login screen
-        loadView("LoginView.fxml");
-    }
 
     /**
      * Loads a new view into the center of the BorderPane.
@@ -231,12 +181,40 @@ public class DashboardController {
      */
     private void loadView(String fxml) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/server/projectfinal/FXML/" + fxml));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/server/projectfinal/Views/" + fxml));
             Parent view = loader.load();
             borderPane.setCenter(view);
         } catch (IOException e) {
             e.printStackTrace();
-            // Optionally, show an alert to the user
+            System.err.println("Failed to load view: " + fxml);
         }
     }
+
+    @FXML
+    private void handleEtudiantsAction(ActionEvent event) {
+        loadView("etudiant-view.fxml");
+    }
+
+    @FXML
+    private void handleProfesseursAction(ActionEvent event) {
+        loadView("professeur-view.fxml");
+    }
+
+    @FXML
+    private void handleModulesAction(ActionEvent event) {
+        loadView("module-view.fxml");
+    }
+
+    @FXML
+    private void handleInscriptionsAction(ActionEvent event) {
+        loadView("dialog/inscription-view.fxml");
+    }
+
+    @FXML
+    private void handleLogoutAction(ActionEvent event) {
+        // Go back to login screen
+        loadView("login-view.fxml");
+    }
+
+
 }

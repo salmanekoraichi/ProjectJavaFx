@@ -1,5 +1,8 @@
 package server.projectfinal.Controllers;
 
+import server.projectfinal.Services.InscriptionsService;
+
+
 /**
  * This code is written by Salmane Koraichi
  **/
@@ -8,4 +11,5 @@ package server.projectfinal.Controllers;
 
 
 public class InscriptionController {
+
 }
