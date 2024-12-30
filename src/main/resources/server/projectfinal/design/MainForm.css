@@ -21,10 +21,6 @@
 
 .main-bg {
     -fx-background-color: linear-gradient(to bottom right, #274f72, #143650); /* Background color */
-    -fx-background-image: url("tanger.jpeg"); /* Background image */
-    -fx-background-size: cover; /* Ensures the image covers the container */
-    -fx-background-position: center; /* Centers the image */
-    -fx-background-repeat: no-repeat; /* Prevents the image from repeating */
 }
 
 .btn{
