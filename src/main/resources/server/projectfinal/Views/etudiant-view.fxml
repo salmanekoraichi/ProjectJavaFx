@@ -18,12 +18,13 @@
                                 <String fx:value="shadow" />
                             </styleClass>
                             <children>
-                                <Button layoutX="20.0" layoutY="177.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css" text="Tableau de bord" />
-                                <Button layoutX="20.0" layoutY="226.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css" text="Etudiants" />
-                                <Button layoutX="20.0" layoutY="275.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css" text="Professeurs" />
-                                <Button layoutX="20.0" layoutY="324.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css" text="Modules" />
-                                <Button layoutX="20.0" layoutY="373.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css" text="Inscriptions" />
-                                <Button layoutX="20.0" layoutY="491.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="210.0" styleClass="logout-btn" stylesheets="@../design/MainForm.css" text="Se déconnecter" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                                <Button fx:id="btnDashboard" layoutX="20.0" layoutY="177.0" mnemonicParsing="false" onAction="#handleDashboardAction" prefHeight="45.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css" text="Tableau de bord" />
+                                <Button fx:id="btnEtudiants" layoutX="20.0" layoutY="226.0" mnemonicParsing="false" onAction="#handleEtudiantsAction" prefHeight="45.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css" text="Étudiants" />
+                                <Button fx:id="btnProfesseurs" layoutX="20.0" layoutY="275.0" mnemonicParsing="false" onAction="#handleProfesseursAction" prefHeight="45.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css" text="Professeurs" />
+                                <Button fx:id="btnModules" layoutX="20.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleModulesAction" prefHeight="45.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css" text="Modules" />
+                                <Button fx:id="btnInscriptions" layoutX="20.0" layoutY="373.0" mnemonicParsing="false" onAction="#handleInscriptionsAction" prefHeight="45.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css" text="Inscriptions" />
+                                <Button fx:id="btnUtilisateurs" layoutX="21.0" layoutY="422.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css" text="Utilisateurs" />
+                                <Button fx:id="btnLogout" layoutX="20.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleLogoutAction" prefHeight="45.0" prefWidth="210.0" styleClass="logout-btn" stylesheets="@../design/MainForm.css" text="Se déconnecter" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
                                 <Line endX="100.0" layoutX="125.0" layoutY="143.0" startX="-100.0" stroke="WHITE" />
                                 <Label layoutX="51.0" layoutY="109.0" text="Bienvenue, Admin " textFill="WHITE">
                                     <font>
