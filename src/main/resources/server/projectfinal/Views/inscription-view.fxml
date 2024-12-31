@@ -44,6 +44,10 @@
                     stylesheets="@../design/MainForm.css"
                     text="Ajouter"
                     onAction="#handleAddInscription" />
+
+            <Button fx:id="btnExportCSV" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="39.0" styleClass="btn-danger" stylesheets="@../design/MainForm.css" text="export" />
+            <Button fx:id="btnExportPDF" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="39.0" styleClass="btn-danger" stylesheets="@../design/MainForm.css" text="export" />
+
          </children>
       </AnchorPane>
    </children>

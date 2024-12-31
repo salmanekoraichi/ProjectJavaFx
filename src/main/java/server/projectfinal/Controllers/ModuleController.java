@@ -20,10 +20,13 @@ import server.projectfinal.Models.Modul;
 import server.projectfinal.Services.ModuleService;
 import server.projectfinal.Services.ProfesseurService;
 import server.projectfinal.Utils.TableUtil; // Suppose you have a utility class for building tables from a ResultSet
-
+import server.projectfinal.Utils.TableUtil;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.Optional;
+
+import static server.projectfinal.Utils.TableUtil.exportToCSV;
+import static server.projectfinal.Utils.TableUtil.exportToPDF;
 
 
 /**
@@ -41,6 +44,9 @@ public class ModuleController {
 
     @FXML
     private AnchorPane TableContainerModule;
+
+    @FXML
+    private Button btnExportCSV, btnExportPDF;
 
     // We'll display modules in a TableView<ObservableList<String>> (similar to your approach for Etudiant).
     private TableView<ObservableList<String>> moduleTable;
@@ -61,6 +67,10 @@ public class ModuleController {
     @FXML
     public void initialize() {
         loadModules();
+
+        // Add export functionality
+        btnExportCSV.setOnAction(event -> exportToCSV(moduleTable, "Modules.csv"));
+        btnExportPDF.setOnAction(event -> exportToPDF(moduleTable, "Modules.pdf"));
 
         // Initially disable modify/remove
         BtnModifyModule.setDisable(true);

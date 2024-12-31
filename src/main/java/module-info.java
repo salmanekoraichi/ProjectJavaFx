@@ -2,6 +2,8 @@ module server.projectfinal {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires java.desktop;
+    requires itextpdf;
 
 
     opens server.projectfinal to javafx.fxml;

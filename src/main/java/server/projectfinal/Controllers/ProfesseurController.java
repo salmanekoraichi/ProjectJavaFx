@@ -22,6 +22,9 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.Optional;
 
+import static server.projectfinal.Utils.TableUtil.exportToCSV;
+import static server.projectfinal.Utils.TableUtil.exportToPDF;
+
 /**
  * This code is written by Salmane Koraichi
  **/
@@ -46,6 +49,9 @@ public class ProfesseurController {
     @FXML
     private Button handleremoveprof;
 
+    @FXML
+    private Button btnExportCSV, btnExportPDF;
+
     private final ProfesseurService professeurService;
 
     private TableView<ObservableList<String>> profTable;
@@ -65,6 +71,9 @@ public class ProfesseurController {
     public void initialize() {
         // Initialisation de la table ou d'autres composants.
         loadprofs();
+
+        btnExportCSV.setOnAction(event -> exportToCSV(profTable, "Professeurs.csv"));
+        btnExportPDF.setOnAction(event -> exportToPDF(profTable, "Professeurs.pdf"));
 
         // Désactiver les boutons de modification et de suppression par défaut.
         handlemodifyprof.setDisable(true);

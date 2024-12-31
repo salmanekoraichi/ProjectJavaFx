@@ -16,7 +16,8 @@ import server.projectfinal.DAO.InscriptionDAOImpl;
 import server.projectfinal.Models.Inscription;
 import server.projectfinal.Services.InscriptionsService;
 import server.projectfinal.Utils.TableUtil;
-
+import static server.projectfinal.Utils.TableUtil.exportToCSV;
+import static server.projectfinal.Utils.TableUtil.exportToPDF;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.Optional;
@@ -31,6 +32,10 @@ public class InscriptionController {
 
     @FXML
     private Button btnAddInscription, btnModifyInscription, btnRemoveInscription;
+
+    @FXML
+    private Button btnExportCSV, btnExportPDF;
+
 
     // We'll store data in a TableView of string rows (like your approach)
     private TableView<ObservableList<String>> inscriptionTable;
@@ -47,6 +52,9 @@ public class InscriptionController {
     @FXML
     public void initialize() {
         loadInscriptions();
+
+        btnExportCSV.setOnAction(event -> exportToCSV(inscriptionTable, "Inscriptions.csv"));
+        btnExportPDF.setOnAction(event -> exportToPDF(inscriptionTable, "Inscriptions.pdf"));
 
         // Disable modify/remove until row is selected
         btnModifyInscription.setDisable(true);

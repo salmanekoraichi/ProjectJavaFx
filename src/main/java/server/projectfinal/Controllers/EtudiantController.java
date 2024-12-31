@@ -25,6 +25,9 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.util.Optional;
 
+import static server.projectfinal.Utils.TableUtil.exportToCSV;
+import static server.projectfinal.Utils.TableUtil.exportToPDF;
+
 /**
  * This code is written by Salmane Koraichi
  **/
@@ -42,6 +45,9 @@ public class EtudiantController {
 
     @FXML
     private Button handlemodifystudent, handleremovestudent;
+
+    @FXML
+    private Button btnExportCSV, btnExportPDF;
 
     private final EtudiantService etudiantService;
     private TableView<ObservableList<String>> studentTable;
@@ -63,6 +69,9 @@ public class EtudiantController {
     public void initialize() {
         // Initialisation de la table ou d'autres composants.
         loadStudents();
+
+        btnExportCSV.setOnAction(event -> exportToCSV(studentTable, "Etudiants.csv"));
+        btnExportPDF.setOnAction(event -> exportToPDF(studentTable, "Etudiants.pdf"));
 
         // Désactiver les boutons de modification et de suppression par défaut.
         handlemodifystudent.setDisable(true);

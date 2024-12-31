@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="SceneContainer" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.projectfinal.Controllers.EtudiantController">
+<AnchorPane fx:id="SceneContainer" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.projectfinal.Controllers.EtudiantController">
    <children>
       <AnchorPane fx:id="TableContainer" layoutX="15.0" layoutY="14.0" prefHeight="454.0" prefWidth="820.0" stylesheets="@../design/MainForm.css" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="14.0">
          <styleClass>
@@ -15,9 +15,11 @@
       </AnchorPane>
       <AnchorPane layoutX="384.0" layoutY="477.0" prefHeight="55.0" prefWidth="454.0" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="12.0">
          <children>
-            <Button fx:id="handleremovestudent" onAction="#handleRemoveStudent" layoutX="333.0" layoutY="8.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="114.0" styleClass="btn-danger" stylesheets="@../design/MainForm.css" text="Supprimer" />
-            <Button fx:id="handlemodifystudent" onAction="#handleModifyStudent"  layoutX="210.0" layoutY="8.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="114.0" styleClass="btn" stylesheets="@../design/MainForm.css" text="Modifier" />
-            <Button fx:id="btnAdd" onAction="#handleAddStudent"  layoutX="87.0" layoutY="8.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="114.0" styleClass="btn" stylesheets="@../design/MainForm.css" text="Ajouter" />
+            <Button fx:id="handleremovestudent" layoutX="333.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleRemoveStudent" prefHeight="40.0" prefWidth="114.0" styleClass="btn-danger" stylesheets="@../design/MainForm.css" text="Supprimer" />
+            <Button fx:id="handlemodifystudent" layoutX="210.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleModifyStudent" prefHeight="40.0" prefWidth="114.0" styleClass="btn" stylesheets="@../design/MainForm.css" text="Modifier" />
+            <Button fx:id="btnAdd" layoutX="87.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleAddStudent" prefHeight="40.0" prefWidth="114.0" styleClass="btn" stylesheets="@../design/MainForm.css" text="Ajouter" />
+            <Button fx:id="btnExportCSV" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="39.0" styleClass="btn-danger" stylesheets="@../design/MainForm.css" text="export" />
+            <Button fx:id="btnExportPDF" layoutX="33.0" layoutY="8.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="39.0" styleClass="btn-danger" stylesheets="@../design/MainForm.css" text="export" />
          </children>
       </AnchorPane>
    </children>
