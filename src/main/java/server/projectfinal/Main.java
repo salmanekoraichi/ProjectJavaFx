@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         try {
             // Load the Dashboard FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/server/projectfinal/Views/auth/login-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/server/projectfinal/Views/login-view.fxml"));
             Parent root = loader.load();
 
             // Set the title of the window

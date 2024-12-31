@@ -18,7 +18,7 @@ public class ModuleDAOImpl implements ModuleDAO {
 
     @Override
     public Modul findById(Integer id) {
-        String query = "SELECT * FROM moduls WHERE id = ?";
+        String query = "SELECT * FROM modules WHERE id = ?";
         try (PreparedStatement pst = connection.prepareStatement(query)) {
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
@@ -97,7 +97,7 @@ public class ModuleDAOImpl implements ModuleDAO {
 
     @Override
     public Modul findMostEnrolledModule() {
-        String query = "SELECT m.*, COUNT(i.moduleId) as enrollment_count FROM moduls m JOIN inscriptions i ON m.id = i.moduleId GROUP BY m.id ORDER BY enrollment_count DESC LIMIT 1";
+        String query = "SELECT m.*, COUNT(i.moduleId) as enrollment_count FROM modules m JOIN inscriptions i ON m.id = i.moduleId GROUP BY m.id ORDER BY enrollment_count DESC LIMIT 1";
         try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
             if (rs.next()) {
                 return new Modul(rs.getInt("id"), rs.getString("nomModule"), rs.getString("codeModule"), rs.getInt("professeurId"));

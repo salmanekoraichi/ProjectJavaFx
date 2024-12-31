@@ -5,6 +5,7 @@ import server.projectfinal.DAO.InscriptionDAO;
 import server.projectfinal.Models.Etudiant;
 import server.projectfinal.Models.Modul;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -14,10 +15,12 @@ public class EtudiantService {
     private final EtudiantDAO etudiantDAO;
     private final InscriptionDAO inscriptionDAO;
 
+
     public EtudiantService(EtudiantDAO etudiantDAO, InscriptionDAO inscriptionDAO) {
         this.etudiantDAO = etudiantDAO;
         this.inscriptionDAO = inscriptionDAO;
     }
+
 
     public Etudiant getEtudiantById(int id) {
         return etudiantDAO.findById(id);
@@ -45,6 +48,10 @@ public class EtudiantService {
 
     public List<Modul> getModulesForEtudiant(int etudiantId) {
         return inscriptionDAO.findModulesByEtudiantId(etudiantId);
+    }
+
+    public ResultSet load(){
+        return etudiantDAO.load();
     }
 }
 

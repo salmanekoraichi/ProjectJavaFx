@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="400.0" styleClass="main-bg" stylesheets="@../../design/MainForm.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.projectfinal.Views.UtilisateurView">
+<AnchorPane prefHeight="400.0" prefWidth="400.0" styleClass="main-bg" stylesheets="@../../design/MainForm.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.projectfinal.Controllers.AjouterProfController">
    <children>
-      <TextField layoutX="187.0" layoutY="156.0" promptText="Entrer le nom..." />
-      <TextField layoutX="187.0" layoutY="191.0" promptText="Entrer le prénom..." />
-      <TextField layoutX="187.0" layoutY="226.0" promptText="Entrer la date de naissance..." />
+      <TextField fx:id="nomprofadd" layoutX="187.0" layoutY="156.0" promptText="Entrer le nom..." />
+      <TextField fx:id="prenomprofadd" layoutX="187.0" layoutY="191.0" promptText="Entrer le prénom..." />
+      <TextField fx:id="specialiteprofadd" layoutX="187.0" layoutY="226.0" promptText="Entrer la date de naissance..." />
       <Label layoutX="120.0" layoutY="160.0" text="Nom:" textFill="WHITE" />
       <Label layoutX="105.0" layoutY="195.0" text="Prenom:" textFill="WHITE" />
       <Label layoutX="96.0" layoutY="229.0" text="Spécialité:" textFill="WHITE" />
@@ -19,6 +19,6 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="187.0" layoutY="321.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="149.0" styleClass="btn" stylesheets="@../../design/MainForm.css" text="Ajouter" />
+      <Button fx:id="handleaddprofo" layoutX="187.0" layoutY="321.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="149.0" styleClass="btn" stylesheets="@../../design/MainForm.css" text="Ajouter" />
    </children>
 </AnchorPane>

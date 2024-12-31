@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.projectfinal.Controllers.DashboardController">
+<AnchorPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.projectfinal.Controllers.AdminController">
     <children>
         <AnchorPane layoutX="150.0" layoutY="54.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -25,7 +25,7 @@
                                 <Button fx:id="btnProfesseurs" layoutX="20.0" layoutY="275.0" mnemonicParsing="false" onAction="#handleProfesseursAction" prefHeight="45.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css" text="Professeurs" />
                                 <Button fx:id="btnModules" layoutX="20.0" layoutY="324.0" mnemonicParsing="false" onAction="#handleModulesAction" prefHeight="45.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css" text="Modules" />
                                 <Button fx:id="btnInscriptions" layoutX="20.0" layoutY="373.0" mnemonicParsing="false" onAction="#handleInscriptionsAction" prefHeight="45.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css" text="Inscriptions" />
-                                <Button fx:id="btnUtilisateurs" layoutX="21.0" layoutY="422.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css" text="Utilisateurs" />
+                                <Button fx:id="btnUtilisateurs" layoutX="21.0" layoutY="422.0" mnemonicParsing="false"  onAction="#handleUtilisateurAction" prefHeight="45.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css" text="Utilisateurs" />
                                 <Button fx:id="btnLogout" layoutX="20.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleLogoutAction" prefHeight="45.0" prefWidth="210.0" styleClass="logout-btn" stylesheets="@../design/MainForm.css" text="Se déconnecter" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
                                 <Line endX="100.0" layoutX="125.0" layoutY="143.0" startX="-100.0" stroke="WHITE" />
                                 <Label layoutX="51.0" layoutY="109.0" text="Bienvenue, Admin" textFill="WHITE">

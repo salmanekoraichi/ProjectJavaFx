@@ -3,6 +3,7 @@ package server.projectfinal.Services;
 import server.projectfinal.DAO.ModuleDAO;
 import server.projectfinal.Models.Modul;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -47,6 +48,10 @@ public class ModuleService {
         } else {
             throw new IllegalArgumentException("Module not found");
         }
+    }
+
+    public ResultSet loadAllModules() {
+        return moduleDAO.load();
     }
 }
 

@@ -100,7 +100,7 @@ public class ProfesseurDAOImpl implements ProfesseurDAO {
 
     @Override
     public List<Modul> findModulesByProfesseurId(int professeurId) {
-        String query = "SELECT * FROM moduls WHERE professeurId = ?";
+        String query = "SELECT * FROM modules WHERE professeurId = ?";
         List<Modul> modules = new ArrayList<>();
         try (PreparedStatement pst = connection.prepareStatement(query)) {
             pst.setInt(1, professeurId);

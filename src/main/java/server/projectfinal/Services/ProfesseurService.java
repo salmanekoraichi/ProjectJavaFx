@@ -4,6 +4,7 @@ import server.projectfinal.DAO.ProfesseurDAO;
 import server.projectfinal.Models.Modul;
 import server.projectfinal.Models.Professeur;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -38,5 +39,9 @@ public class ProfesseurService {
 
     public List<Modul> getModulesByProfesseur(int professeurId) {
         return professeurDAO.findModulesByProfesseurId(professeurId);
+    }
+
+    public ResultSet load(){
+        return professeurDAO.load();
     }
 }

@@ -4,7 +4,9 @@ import server.projectfinal.DAO.UtilisateurDAO;
 import server.projectfinal.DAO.UtilisateurDAOImpl;
 import server.projectfinal.Models.Utilisateur;
 
+import java.sql.ResultSet;
 import java.util.List;
+import java.util.Random;
 
 /**
  * This code is written by Salmane Koraichi
@@ -64,5 +66,8 @@ public class UtilisateurService {
         return utilisateurDAO.findAll();
     }
 
+    public ResultSet load(){
+        return utilisateurDAO.load();
+    }
 }
 
