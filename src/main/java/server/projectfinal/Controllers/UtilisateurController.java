@@ -17,6 +17,8 @@ import server.projectfinal.DAO.UtilisateurDAOImpl;
 import server.projectfinal.Models.Utilisateur;
 import server.projectfinal.Services.UtilisateurService;
 import server.projectfinal.Utils.TableUtil;
+import static server.projectfinal.Utils.PopupNotification.showSuccess;
+import static server.projectfinal.Utils.PopupNotification.showError;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -190,19 +192,6 @@ public class UtilisateurController {
         }
     }
 
-    private void showError(String msg) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erreur");
-        alert.setContentText(msg);
-        alert.showAndWait();
-    }
-
-    private void showSuccess(String msg) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Succès");
-        alert.setContentText(msg);
-        alert.showAndWait();
-    }
 
     private void handleSearchUsers(String query) {
         try {

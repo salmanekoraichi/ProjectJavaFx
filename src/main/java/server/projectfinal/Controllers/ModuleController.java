@@ -25,7 +25,8 @@ import server.projectfinal.Utils.TableUtil;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.Optional;
-
+import static server.projectfinal.Utils.PopupNotification.showSuccess;
+import static server.projectfinal.Utils.PopupNotification.showError;
 import static server.projectfinal.Utils.TableUtil.exportToCSV;
 import static server.projectfinal.Utils.TableUtil.exportToPDF;
 
@@ -223,18 +224,6 @@ public class ModuleController {
             e.printStackTrace();
             return Optional.empty();
         }
-    }
-
-    private void showError(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    private void showSuccess(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     private void handleSearchModules(String query) {

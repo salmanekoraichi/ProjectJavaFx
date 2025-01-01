@@ -23,9 +23,12 @@ import server.projectfinal.DAO.ProfesseurDAO;
 import server.projectfinal.DAO.ProfesseurDAOImpl;
 import server.projectfinal.DAO.InscriptionDAO;
 import server.projectfinal.DAO.InscriptionDAOImpl;
+import server.projectfinal.Utils.PopupNotification;
 
 import java.io.IOException;
 import java.util.Map;
+
+import static server.projectfinal.Utils.TableUtil.showError;
 
 /**
  * Controller class for the Dashboard view.
@@ -170,10 +173,4 @@ public class AdminController {
         }
     }
 
-    private void showError(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }

@@ -22,6 +22,8 @@ import static server.projectfinal.Utils.TableUtil.exportToPDF;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.Optional;
+import static server.projectfinal.Utils.PopupNotification.showSuccess;
+import static server.projectfinal.Utils.PopupNotification.showError;
 
 /**
  * Manages Inscription table and actions (add/modify/remove).
@@ -199,19 +201,6 @@ public class InscriptionController {
         }
     }
 
-    private void showError(String msg) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erreur");
-        alert.setContentText(msg);
-        alert.showAndWait();
-    }
-
-    private void showSuccess(String msg) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Succès");
-        alert.setContentText(msg);
-        alert.showAndWait();
-    }
 
     private void handleSearchInscriptions(String query) {
         try {
