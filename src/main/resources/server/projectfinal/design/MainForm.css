@@ -35,11 +35,15 @@
 }
 
 .btn-danger {
-    -fx-background-color: linear-gradient(to bottom right, #FF3547, #ff2929);
+    -fx-background-color: linear-gradient(to bottom right, #fb1b2f, #ff2929);
     -fx-font-family: Arial;
     -fx-font-size: 14px;
     -fx-cursor: hand;
     -fx-text-fill: #fff;
+}
+
+.btn-danger:hover{
+    -fx-background-color: linear-gradient(to bottom right, #ff3b4b, #ef2e2e);
 }
 
 .logout-btn {
