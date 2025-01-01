@@ -73,6 +73,12 @@ public class UtilisateurController {
             userTable = TableUtil.FillTable(rs);
             TableContainer.getChildren().add(userTable);
 
+            // Ajuster les ancres pour que la table s'étende correctement
+            AnchorPane.setTopAnchor(userTable, 10.0); // Adjust top margin
+            AnchorPane.setLeftAnchor(userTable, 10.0); // Adjust left margin
+            AnchorPane.setRightAnchor(userTable, 10.0); // Adjust right margin
+            AnchorPane.setBottomAnchor(userTable, 10.0); // Optional for bottom margin
+
             // Listen for selection changes
             userTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
                 boolean selected = (newVal != null);

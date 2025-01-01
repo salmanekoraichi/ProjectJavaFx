@@ -103,6 +103,13 @@ public class ModuleController {
             moduleTable = TableUtil.FillTable(rs);
             TableContainerModule.getChildren().add(moduleTable);
 
+            // Ajuster les ancres pour que la table s'étende correctement
+            AnchorPane.setTopAnchor(moduleTable, 10.0); // Adjust top margin
+            AnchorPane.setLeftAnchor(moduleTable, 10.0); // Adjust left margin
+            AnchorPane.setRightAnchor(moduleTable, 10.0); // Adjust right margin
+            AnchorPane.setBottomAnchor(moduleTable, 10.0); // Optional for bottom margin
+
+
             // Listen for selection changes
             moduleTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
                 boolean selected = (newVal != null);

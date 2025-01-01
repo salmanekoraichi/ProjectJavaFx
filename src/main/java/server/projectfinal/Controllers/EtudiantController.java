@@ -114,6 +114,12 @@ public class EtudiantController {
             // Ajouter la table au conteneur
             TableContainer.getChildren().add(studentTable);
 
+            // Ajuster les ancres pour que la table s'étende correctement
+            AnchorPane.setTopAnchor(studentTable, 10.0); // Adjust top margin
+            AnchorPane.setLeftAnchor(studentTable, 10.0); // Adjust left margin
+            AnchorPane.setRightAnchor(studentTable, 10.0); // Adjust right margin
+            AnchorPane.setBottomAnchor(studentTable, 10.0); // Optional for bottom margin
+
             // Activer/Désactiver les boutons en fonction de la sélection
             studentTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                 boolean selected = newSelection != null;

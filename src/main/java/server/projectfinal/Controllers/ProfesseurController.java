@@ -120,6 +120,12 @@ public class ProfesseurController {
             // Ajouter la table au conteneur
             TableContainerprof.getChildren().add(profTable);
 
+            // Ajuster les ancres pour que la table s'étende correctement
+            AnchorPane.setTopAnchor(profTable, 10.0); // Adjust top margin
+            AnchorPane.setLeftAnchor(profTable, 10.0); // Adjust left margin
+            AnchorPane.setRightAnchor(profTable, 10.0); // Adjust right margin
+            AnchorPane.setBottomAnchor(profTable, 10.0); // Optional for bottom margin
+
             // Activer/Désactiver les boutons en fonction de la sélection
             profTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                 boolean selected = newSelection != null;

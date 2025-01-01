@@ -89,6 +89,13 @@ public class InscriptionController {
             inscriptionTable = TableUtil.FillTable(rs);
             TableContainer.getChildren().add(inscriptionTable);
 
+            // Ajuster les ancres pour que la table s'étende correctement
+            AnchorPane.setTopAnchor(inscriptionTable, 10.0); // Adjust top margin
+            AnchorPane.setLeftAnchor(inscriptionTable, 10.0); // Adjust left margin
+            AnchorPane.setRightAnchor(inscriptionTable, 10.0); // Adjust right margin
+            AnchorPane.setBottomAnchor(inscriptionTable, 10.0); // Optional for bottom margin
+
+
             inscriptionTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
                 boolean selected = (newVal != null);
                 btnModifyInscription.setDisable(!selected);

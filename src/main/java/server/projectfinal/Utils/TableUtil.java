@@ -28,6 +28,9 @@ public class TableUtil {
     public static TableView<ObservableList<String>> FillTable(ResultSet rs) throws Exception {
         TableView<ObservableList<String>> tableView = new TableView<>();
 
+        // Set constrained resize policy
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         // Retrieve metadata from ResultSet
         ResultSetMetaData metaData = rs.getMetaData();
         int columnCount = metaData.getColumnCount();
