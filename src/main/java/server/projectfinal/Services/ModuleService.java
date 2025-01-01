@@ -2,8 +2,9 @@ package server.projectfinal.Services;
 
 import server.projectfinal.DAO.ModuleDAO;
 import server.projectfinal.Models.Modul;
+import server.projectfinal.Utils.DBConnection;
 
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.List;
 
 /**
@@ -52,6 +53,27 @@ public class ModuleService {
 
     public ResultSet loadAllModules() {
         return moduleDAO.load();
+    }
+
+    public ResultSet searchModules(String query) throws SQLException {
+        // Suppose columns: id, nomModule, codeModule, professeurId, ...
+        // Maybe also join with professeur table to search by prof name.
+        String sql =
+                "SELECT m.* "
+                        + "FROM module m "
+                        + "JOIN professeur p ON m.professeur_id = p.id "
+                        + "WHERE m.nomModule LIKE ? "
+                        + "   OR m.codeModule LIKE ? "
+                        + "   OR p.nom LIKE ? "
+                        + "   OR p.prenom LIKE ?";
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, "%" + query + "%");
+        ps.setString(2, "%" + query + "%");
+        ps.setString(3, "%" + query + "%");
+        ps.setString(4, "%" + query + "%");
+
+        return ps.executeQuery();
     }
 }
 

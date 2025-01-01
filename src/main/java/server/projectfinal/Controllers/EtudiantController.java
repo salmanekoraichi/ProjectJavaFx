@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -49,6 +50,9 @@ public class EtudiantController {
     @FXML
     private Button btnExportCSV, btnExportPDF;
 
+    @FXML
+    private TextField searchFieldEtudiant;
+
     private final EtudiantService etudiantService;
     private TableView<ObservableList<String>> studentTable;
 
@@ -69,6 +73,11 @@ public class EtudiantController {
     public void initialize() {
         // Initialisation de la table ou d'autres composants.
         loadStudents();
+
+        searchFieldEtudiant.textProperty().addListener((obs, oldV, newV) -> {
+            handleSearchEtudiant(newV);
+        });
+
 
         btnExportCSV.setOnAction(event -> exportToCSV(studentTable, "Etudiants.csv"));
         btnExportPDF.setOnAction(event -> exportToPDF(studentTable, "Etudiants.pdf"));
@@ -232,6 +241,19 @@ public class EtudiantController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    private void handleSearchEtudiant(String query) {
+        try {
+            if (query == null || query.trim().isEmpty()) {
+                loadStudents(); // revert to all
+                return;
+            }
+            ResultSet rs = etudiantService.searchEtudiants(query);
+            updateTable(rs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

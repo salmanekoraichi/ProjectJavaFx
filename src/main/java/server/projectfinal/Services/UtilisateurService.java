@@ -3,7 +3,9 @@ package server.projectfinal.Services;
 import server.projectfinal.DAO.UtilisateurDAO;
 import server.projectfinal.DAO.UtilisateurDAOImpl;
 import server.projectfinal.Models.Utilisateur;
+import server.projectfinal.Utils.DBConnection;
 
+import java.sql.*;
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.Random;
@@ -69,5 +71,22 @@ public class UtilisateurService {
     public ResultSet load(){
         return utilisateurDAO.load();
     }
+
+
+    public ResultSet searchUtilisateurs(String query) throws SQLException {
+        // Suppose columns: id, username, password, role, ...
+        String sql =
+                "SELECT * FROM utilisateur "
+                        + "WHERE username LIKE ? "
+                        + "   OR role LIKE ?";
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, "%" + query + "%");
+        ps.setString(2, "%" + query + "%");
+        return ps.executeQuery();
+    }
+
+
+
 }
 

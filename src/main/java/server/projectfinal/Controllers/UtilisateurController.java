@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -27,6 +28,9 @@ public class UtilisateurController {
     private AnchorPane TableContainer;
 
     @FXML
+    private TextField searchFieldUser;
+
+    @FXML
     private Button btnAddUser, btnModifyUser, btnRemoveUser;
 
     private TableView<ObservableList<String>> userTable;
@@ -43,6 +47,10 @@ public class UtilisateurController {
     @FXML
     public void initialize() {
         loadUsers();
+
+        searchFieldUser.textProperty().addListener((obs, oldVal, newVal) -> {
+            handleSearchUsers(newVal);
+        });
 
         // Disable Modify/Remove by default
         btnModifyUser.setDisable(true);
@@ -188,5 +196,18 @@ public class UtilisateurController {
         alert.setTitle("Succès");
         alert.setContentText(msg);
         alert.showAndWait();
+    }
+
+    private void handleSearchUsers(String query) {
+        try {
+            if (query == null || query.trim().isEmpty()) {
+                loadUsers();
+                return;
+            }
+            ResultSet rs = utilisateurService.searchUtilisateurs(query);
+            updateTable(rs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

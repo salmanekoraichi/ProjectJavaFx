@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -40,6 +41,9 @@ public class ModuleController {
     private Button BtnAddModule , BtnModifyModule, BtnRemoveModule;
 
     @FXML
+    private TextField searchFieldModule;
+
+    @FXML
     private AnchorPane SceneContainer;
 
     @FXML
@@ -67,6 +71,10 @@ public class ModuleController {
     @FXML
     public void initialize() {
         loadModules();
+
+        searchFieldModule.textProperty().addListener((obs, oldVal, newVal) -> {
+            handleSearchModules(newVal);
+        });
 
         // Add export functionality
         btnExportCSV.setOnAction(event -> exportToCSV(moduleTable, "Modules.csv"));
@@ -221,4 +229,18 @@ public class ModuleController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    private void handleSearchModules(String query) {
+        try {
+            if (query == null || query.trim().isEmpty()) {
+                loadModules();
+                return;
+            }
+            ResultSet rs = moduleService.searchModules(query);
+            updateTable(rs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

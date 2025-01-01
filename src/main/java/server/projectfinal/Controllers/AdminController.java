@@ -1,15 +1,18 @@
 package server.projectfinal.Controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import server.projectfinal.Services.DashboardService;
 import server.projectfinal.Services.EtudiantService;
 import server.projectfinal.Services.ProfesseurService;
@@ -123,8 +126,25 @@ public class AdminController {
      */
     @FXML
     private void handleLogoutAction(ActionEvent event) {
-        // Implement logout logic, such as returning to the login screen
-        loadView("login-view.fxml");
+        try {
+            // Close the current stage
+            btnLogout.getScene().getWindow().hide();
+
+            // Load the login view
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/server/projectfinal/Views/login-view.fxml"));
+            Parent loginView = loader.load();
+
+            // Create a new stage for the login screen
+            Stage loginStage = new Stage();
+            loginStage.setTitle("Login");
+            loginStage.setScene(new Scene(loginView));
+            loginStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Optionally, show an alert to the user
+            showError("Unable to logout and return to the login screen: " + e.getMessage());
+        }
     }
 
     @FXML
@@ -148,5 +168,12 @@ public class AdminController {
             e.printStackTrace();
             // Optionally, show an alert to the user
         }
+    }
+
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

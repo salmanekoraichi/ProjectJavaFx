@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -52,6 +53,10 @@ public class ProfesseurController {
     @FXML
     private Button btnExportCSV, btnExportPDF;
 
+    // NEW:
+    @FXML
+    private TextField searchFieldProf;
+
     private final ProfesseurService professeurService;
 
     private TableView<ObservableList<String>> profTable;
@@ -74,6 +79,14 @@ public class ProfesseurController {
 
         btnExportCSV.setOnAction(event -> exportToCSV(profTable, "Professeurs.csv"));
         btnExportPDF.setOnAction(event -> exportToPDF(profTable, "Professeurs.pdf"));
+
+
+        // If you want "live search" while typing:
+        searchFieldProf.textProperty().addListener((obs, oldVal, newVal) -> {
+            // Call a method to search
+            handleSearchProfessors(newVal);
+        });
+
 
         // Désactiver les boutons de modification et de suppression par défaut.
         handlemodifyprof.setDisable(true);
@@ -236,6 +249,26 @@ public class ProfesseurController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+
+    /**
+     * Called whenever the search text changes.
+     * Example: search by professor name, or module taught.
+     */
+    private void handleSearchProfessors(String query) {
+        try {
+            // If query is empty, show all
+            if (query == null || query.trim().isEmpty()) {
+                loadprofs();
+                return;
+            }
+            // Otherwise, call a service method that does a "WHERE" query
+            ResultSet rs = professeurService.searchProfesseurs(query);
+            updateTable(rs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

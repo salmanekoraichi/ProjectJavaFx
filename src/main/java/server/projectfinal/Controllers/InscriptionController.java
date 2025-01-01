@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -36,6 +37,9 @@ public class InscriptionController {
     @FXML
     private Button btnExportCSV, btnExportPDF;
 
+    @FXML
+    private TextField searchFieldInscription;
+
 
     // We'll store data in a TableView of string rows (like your approach)
     private TableView<ObservableList<String>> inscriptionTable;
@@ -52,6 +56,11 @@ public class InscriptionController {
     @FXML
     public void initialize() {
         loadInscriptions();
+
+        // If you want “live search” as user types:
+        searchFieldInscription.textProperty().addListener((obs, oldVal, newVal) -> {
+            handleSearchInscriptions(newVal);
+        });
 
         btnExportCSV.setOnAction(event -> exportToCSV(inscriptionTable, "Inscriptions.csv"));
         btnExportPDF.setOnAction(event -> exportToPDF(inscriptionTable, "Inscriptions.pdf"));
@@ -195,5 +204,21 @@ public class InscriptionController {
         alert.setTitle("Succès");
         alert.setContentText(msg);
         alert.showAndWait();
+    }
+
+    private void handleSearchInscriptions(String query) {
+        try {
+            if (query == null || query.trim().isEmpty()) {
+                // show all
+                loadInscriptions();
+                return;
+            }
+            // We assume your InscriptionsService has searchInscriptions(query)
+            ResultSet rs = inscriptionsService.searchInscriptions(query);
+            updateTable(rs);
+        } catch (Exception e) {
+            e.printStackTrace();
+            showError("Erreur lors de la recherche : " + e.getMessage());
+        }
     }
 }

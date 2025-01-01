@@ -4,8 +4,9 @@ import server.projectfinal.DAO.EtudiantDAO;
 import server.projectfinal.DAO.InscriptionDAO;
 import server.projectfinal.Models.Etudiant;
 import server.projectfinal.Models.Modul;
+import server.projectfinal.Utils.DBConnection;
 
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.List;
 
 /**
@@ -53,5 +54,25 @@ public class EtudiantService {
     public ResultSet load(){
         return etudiantDAO.load();
     }
+
+
+    public ResultSet searchEtudiants(String query) throws SQLException {
+        // If you want multi-criteria: search by nom, prenom, promotion, or matricule, etc.
+        String sql = "SELECT * FROM etudiants "
+                + "WHERE nom LIKE ? "
+                + "   OR prenom LIKE ? "
+                + "   OR promotion LIKE ? "
+                + "   OR matricule LIKE ?";
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, "%" + query + "%");
+        ps.setString(2, "%" + query + "%");
+        ps.setString(3, "%" + query + "%");
+        ps.setString(4, "%" + query + "%");
+        return ps.executeQuery();
+    }
+
+
+
 }
 
