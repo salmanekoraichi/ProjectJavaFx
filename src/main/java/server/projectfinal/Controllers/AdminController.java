@@ -28,7 +28,8 @@ import server.projectfinal.Utils.PopupNotification;
 import java.io.IOException;
 import java.util.Map;
 
-import static server.projectfinal.Utils.TableUtil.showError;
+import static server.projectfinal.Utils.PopupNotification.showError;
+
 
 /**
  * Controller class for the Dashboard view.

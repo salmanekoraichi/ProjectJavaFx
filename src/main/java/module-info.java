@@ -5,7 +5,6 @@ module server.projectfinal {
     requires java.desktop;
     requires itextpdf;
 
-
     opens server.projectfinal to javafx.fxml;
     exports server.projectfinal;
 

@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import server.projectfinal.Models.Utilisateur;
 import server.projectfinal.Services.UtilisateurService;
 
+import javax.print.attribute.standard.Media;
 import java.io.IOException;
 
 import static server.projectfinal.Utils.PopupNotification.showErrorAlert;
@@ -74,6 +75,8 @@ public class LoginView {
                 // Optional: Enable exiting fullscreen with the ESC key
                 stage.setFullScreenExitHint("Press ESC to exit fullscreen");
                 stage.setFullScreenExitKeyCombination(KeyCombination.valueOf("ESCAPE"));
+
+
 
                 stage.show();
             } catch (IOException e) {

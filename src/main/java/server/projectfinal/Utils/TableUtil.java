@@ -22,6 +22,11 @@ import java.sql.ResultSetMetaData;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import static server.projectfinal.Utils.PopupNotification.showError;
+import static server.projectfinal.Utils.PopupNotification.showSuccess;
+
+
+
 
 public class TableUtil {
 
@@ -166,18 +171,4 @@ public class TableUtil {
     }
 
 
-
-    public static void showError(String msg) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setContentText(msg);
-        alert.showAndWait();
-    }
-
-    public static void showSuccess(String msg) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setContentText(msg);
-        alert.showAndWait();
-    }
 }
