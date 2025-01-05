@@ -18,7 +18,7 @@ public class Professeur {
         this.specialite = specialite;
         this.nom = nom;
         this.prenom = prenom;
-        this.Username = nom+prenom;
+        this.Username = nom+"."+prenom;
     }
 
     public int getId() {

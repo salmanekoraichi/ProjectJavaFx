@@ -77,7 +77,7 @@ public class AjouterEtudiantController {
             Etudiant nouvelEtudiant = new Etudiant();
             nouvelEtudiant.setMatricule(matriculeadd.getText());
             nouvelEtudiant.setNom(nomadd.getText());
-            nouvelEtudiant.setPrenom(promotionadd.getText());
+            nouvelEtudiant.setPrenom(prenomadd.getText());
             nouvelEtudiant.setPromotion(promotionadd.getText());
 
             // Convert DatePicker to LocalDate if your model expects it
