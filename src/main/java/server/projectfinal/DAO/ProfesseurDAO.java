@@ -10,5 +10,6 @@ import java.util.List;
  **/
 public interface ProfesseurDAO extends CRUD<Professeur,Integer> {
     List<Modul> findModulesByProfesseurId(int professeurId);
+    public Professeur findByUsername(String Username);
 
 }

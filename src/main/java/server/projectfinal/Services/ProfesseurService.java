@@ -1,8 +1,10 @@
 package server.projectfinal.Services;
 
 import server.projectfinal.DAO.ProfesseurDAO;
+import server.projectfinal.DAO.UtilisateurDAOImpl;
 import server.projectfinal.Models.Modul;
 import server.projectfinal.Models.Professeur;
+import server.projectfinal.Models.Utilisateur;
 import server.projectfinal.Utils.DBConnection;
 
 import java.sql.*;
@@ -29,6 +31,12 @@ public class ProfesseurService {
 
     public void addProfesseur(Professeur professeur) {
         professeurDAO.save(professeur);
+        UtilisateurDAOImpl utilisateurDAO = new UtilisateurDAOImpl();
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setUsername(professeur.getUsername());
+        utilisateur.setPassword(professeur.getUsername());
+        utilisateur.setRole("professeur");
+        utilisateurDAO.save(utilisateur);
     }
 
     public void updateProfesseur(Professeur professeur) {

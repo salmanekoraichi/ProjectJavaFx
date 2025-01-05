@@ -35,6 +35,21 @@ public class ProfesseurDAOImpl implements ProfesseurDAO {
     }
 
     @Override
+    public Professeur findByUsername(String Username) {
+        String query = "SELECT * FROM professeurs WHERE Username = ?";
+        try (PreparedStatement pst = connection.prepareStatement(query)) {
+            pst.setString(1, Username);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return new Professeur(rs.getInt("id"), rs.getString("specialite"), rs.getString("nom"), rs.getString("prenom"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public List<Professeur> findAll() {
         String query = "SELECT * FROM professeurs";
         List<Professeur> professeurs = new ArrayList<>();
