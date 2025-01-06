@@ -28,7 +28,7 @@ public class EtudiantEnsignController {
     @FXML
     private AnchorPane TableContainer;
 
-    private TableView<ObservableList<String>> ModuleTable;
+    private TableView<ObservableList<String>> etudiant_table;
 
     private final ModuleService moduleService;
     private final server.projectfinal.Services.ProfesseurService ProfesseurService;
@@ -64,14 +64,14 @@ public class EtudiantEnsignController {
         }
     }*/
 
-    private void loadmodules() {
+    private void loadetudiant() {
         if (username == null) {
             showError("Username is not set properly.");
             return;
         }
 
         int professeurId = ProfesseurService.findidbyusername(username);
-        ResultSet rs = ProfesseurService.getModsbyid(professeurId);
+        ResultSet rs = ProfesseurService.GetEtudiantsById(professeurId);
 
         if (rs == null) {
             showError("No modules found for this professor.");
@@ -85,16 +85,16 @@ public class EtudiantEnsignController {
     private void updateTable(ResultSet rs) {
         try {
             TableContainer.getChildren().clear();
-            ModuleTable = TableUtil.FilloTable(rs);
-            TableContainer.getChildren().add(ModuleTable);
+            etudiant_table = TableUtil.FilloTable(rs);
+            TableContainer.getChildren().add(etudiant_table);
 
             // Adjust anchors for table to expand properly
-            AnchorPane.setTopAnchor(ModuleTable, 10.0);
-            AnchorPane.setLeftAnchor(ModuleTable, 10.0);
-            AnchorPane.setRightAnchor(ModuleTable, 10.0);
-            AnchorPane.setBottomAnchor(ModuleTable, 10.0);
+            AnchorPane.setTopAnchor(etudiant_table, 10.0);
+            AnchorPane.setLeftAnchor(etudiant_table, 10.0);
+            AnchorPane.setRightAnchor(etudiant_table, 10.0);
+            AnchorPane.setBottomAnchor(etudiant_table, 10.0);
 
-            ModuleTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            etudiant_table.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
                 boolean selected = (newVal != null);
             });
         } catch (Exception e) {
@@ -107,6 +107,6 @@ public class EtudiantEnsignController {
     public void setUsername(String username) {
         this.username = username;
         System.out.println("Logged in as: " + username);
-        loadmodules(); // Call loadmodules here to update the table
+        loadetudiant(); // Call loadmodules here to update the table
     }
 }

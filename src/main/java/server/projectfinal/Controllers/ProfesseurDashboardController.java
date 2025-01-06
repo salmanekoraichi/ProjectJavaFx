@@ -36,7 +36,7 @@ public class ProfesseurDashboardController {
 
     @FXML
     void handleEtd(ActionEvent event) {
-        loadView("utilisateur-view.fxml");
+        loadView("etudiant-enseigne-view.fxml");
     }
 
     @FXML
@@ -69,9 +69,14 @@ public class ProfesseurDashboardController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/server/projectfinal/Views/" + fxml));
             Parent view = loader.load();
 
-            ModuleEnsignController controller = loader.getController();
-            controller.setUsername(username); // Pass username to the next controller
-
+            // Correctly retrieve the controller based on the fxml
+            if (fxml.equals("module-enseigne-view.fxml")) {
+                ModuleEnsignController controller = loader.getController();
+                controller.setUsername(username);
+            } else if (fxml.equals("utilisateur-view.fxml")) {
+                EtudiantEnsignController controller = loader.getController();
+                controller.setUsername(username);
+            }
             // Set the new view in the BorderPane
             Borderpane.setCenter(view);
         } catch (IOException e) {
