@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="400.0" styleClass="main-bg" stylesheets="@../design/MainForm.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.projectfinal.Controllers.LoginView">
    <children>
-      <Label layoutX="110.0" layoutY="83.0" text="Campus Link" textFill="WHITE">
+      <Label layoutX="155.0" layoutY="83.0" text="Linkey" textFill="WHITE">
          <font>
             <Font size="32.0" />
          </font>
@@ -20,10 +20,10 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Line endX="100.0" layoutX="200.0" layoutY="138.0" startX="-100.0" stroke="WHITE" />
+      <Line endX="-9.0" layoutX="254.0" layoutY="140.0" startX="-100.0" stroke="WHITE" />
       <TextField fx:id="usernameField" layoutX="95.0" layoutY="233.0" prefHeight="35.0" prefWidth="211.0" promptText="Nom d'utilisateur.." styleClass="input-field" stylesheets="@../design/MainForm.css" />
       <PasswordField fx:id="passwordField" layoutX="95.0" layoutY="284.0" prefHeight="35.0" prefWidth="211.0" promptText="Mot de passe.." styleClass="input-field" stylesheets="@../design/MainForm.css" />
-      <Button layoutX="95.0" layoutY="348.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="211.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css" text="Login" onAction="#handleLoginButton" />
-      <Label layoutX="95.0" layoutY="469.0" text="© 2024 CampusLink. All rights reserved." textFill="WHITE" />
+      <Button layoutX="95.0" layoutY="348.0" mnemonicParsing="false" onAction="#handleLoginButton" prefHeight="47.0" prefWidth="211.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css" text="Login" />
+      <Label layoutX="95.0" layoutY="469.0" text="© 2024 Linkey. All rights reserved." textFill="WHITE" />
    </children>
 </AnchorPane>

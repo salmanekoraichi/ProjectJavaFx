@@ -17,7 +17,7 @@ public class Main extends Application {
             Parent root = loader.load();
 
             // Set the title of the window
-            primaryStage.setTitle("Campus Link | Connexion ");
+            primaryStage.setTitle("Linky | Connexion ");
 
             // Set the icon of the window
             Image ensat_image = new Image(getClass().getResource("/server/projectfinal/images/ensalogo.png").toString());

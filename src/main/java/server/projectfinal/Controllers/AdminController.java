@@ -125,7 +125,7 @@ public class AdminController {
 
             // Create a new stage for the login screen
             Stage loginStage = new Stage();
-            loginStage.setTitle("Campus Link | Connexion");
+            loginStage.setTitle("Linkey | Connexion");
 
             // Set the icon of the window
             Image ensat_image = new Image(getClass().getResource("/server/projectfinal/images/ensalogo.png").toString());

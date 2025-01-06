@@ -47,7 +47,7 @@ public class ProfesseurDashboardController {
             Parent loginView = loader.load();
 
             Stage loginStage = new Stage();
-            loginStage.setTitle("Login");
+            loginStage.setTitle("Linkey | Connexion");
             loginStage.setScene(new Scene(loginView));
             loginStage.show();
 

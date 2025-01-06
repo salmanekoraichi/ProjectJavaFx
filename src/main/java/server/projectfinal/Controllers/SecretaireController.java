@@ -79,7 +79,7 @@ public class SecretaireController {
 
             // Create a new stage for the login screen
             Stage loginStage = new Stage();
-            loginStage.setTitle("Login");
+            loginStage.setTitle("Linkey | Connexion");
             loginStage.setScene(new Scene(loginView));
             loginStage.show();
 
