@@ -107,7 +107,7 @@ public class ProfesseurService {
 
 
     public ResultSet GetEtudiantsById(int id){
-        String query = "SELECT * FROM etudiant WHERE etudiant_id IN ( SELECT etudiant_id  FROM inscription WHERE module_id IN ( SELECT modules_id FROM modules WHERE professeurId = ?));";
+        String query = "SELECT * FROM etudiants WHERE etudiants.id IN ( SELECT inscriptions.etudiantId FROM inscriptions WHERE inscriptions.moduleId IN ( SELECT modules.id FROM modules WHERE professeurId = ?))";
         Connection connection = DBConnection.getInstance().getConnection();
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
