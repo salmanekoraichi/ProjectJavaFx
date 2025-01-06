@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import server.projectfinal.Services.DashboardService;
@@ -136,7 +137,12 @@ public class AdminController {
 
             // Create a new stage for the login screen
             Stage loginStage = new Stage();
-            loginStage.setTitle("Login");
+            loginStage.setTitle("Campus Link | Connexion");
+
+            // Set the icon of the window
+            Image ensat_image = new Image(getClass().getResource("/server/projectfinal/images/ensalogo.png").toString());
+            loginStage.getIcons().add(ensat_image);
+
             loginStage.setScene(new Scene(loginView));
             loginStage.show();
 
