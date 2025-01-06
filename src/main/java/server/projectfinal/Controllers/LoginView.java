@@ -65,6 +65,11 @@ public class LoginView {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(dashboardPath));
                 Parent root = loader.load();
 
+                if(role.equals("professor")) {
+                    ProfesseurDashboardController controller = loader.getController();
+                    controller.setUsername(usernameField.getText());
+                }
+
                 // Set the new scene
                 Scene scene = new Scene(root);
                 stage.setScene(scene);

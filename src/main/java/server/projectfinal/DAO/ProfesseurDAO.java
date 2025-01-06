@@ -3,6 +3,7 @@ package server.projectfinal.DAO;
 import server.projectfinal.Models.Modul;
 import server.projectfinal.Models.Professeur;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -11,5 +12,7 @@ import java.util.List;
 public interface ProfesseurDAO extends CRUD<Professeur,Integer> {
     List<Modul> findModulesByProfesseurId(int professeurId);
     public Professeur findByUsername(String Username);
+    public int findidbyusername(String username);
+    public ResultSet getMdsbyid(int id);
 
 }

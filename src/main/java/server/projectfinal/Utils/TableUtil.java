@@ -19,6 +19,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -171,4 +172,45 @@ public class TableUtil {
     }
 
 
-}
+    public static TableView<ObservableList<String>> FilloTable(ResultSet rs) throws Exception {
+        if (rs == null) {
+            throw new IllegalArgumentException("ResultSet cannot be null");
+        }
+
+        TableView<ObservableList<String>> tableView = new TableView<>();
+
+        // Set constrained resize policy
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        // Retrieve metadata from ResultSet
+        ResultSetMetaData metaData = rs.getMetaData();
+        int columnCount = metaData.getColumnCount();
+
+        // Dynamically create columns
+        for (int i = 1; i <= columnCount; i++) {
+            final int colIndex = i - 1; // Zero-based index for ObservableList
+            String columnName = metaData.getColumnName(i);
+
+            TableColumn<ObservableList<String>, String> column = new TableColumn<>(columnName);
+            column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().get(colIndex)));
+            tableView.getColumns().add(column);
+        }
+
+        // Add rows from ResultSet to ObservableList
+        ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
+        while (rs.next()) {
+            ObservableList<String> row = FXCollections.observableArrayList();
+            for (int i = 1; i <= columnCount; i++) {
+                row.add(rs.getString(i)); // Add each column value
+            }
+            data.add(row);
+        }
+        tableView.setItems(data);
+
+        // Close the ResultSet after use
+        rs.close();
+
+        return tableView;
+    }
+    }
+

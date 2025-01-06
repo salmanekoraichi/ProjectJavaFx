@@ -71,7 +71,7 @@ public class SecretaireController {
     private void out(javafx.event.ActionEvent event) {
         try {
             // Close the current stage
-            btnEtudiant.getScene().getWindow().hide();
+            borderpane.getScene().getWindow().hide();
 
             // Load the login view
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/server/projectfinal/Views/login-view.fxml"));

@@ -7,6 +7,9 @@ import server.projectfinal.Models.Professeur;
 import server.projectfinal.Models.Utilisateur;
 import server.projectfinal.Utils.DBConnection;
 
+import javax.sql.rowset.CachedRowSet;
+import javax.sql.rowset.RowSetFactory;
+import javax.sql.rowset.RowSetProvider;
 import java.sql.*;
 import java.util.List;
 
@@ -51,6 +54,8 @@ public class ProfesseurService {
         return professeurDAO.findModulesByProfesseurId(professeurId);
     }
 
+
+
     public ResultSet load(){
         return professeurDAO.load();
     }
@@ -70,6 +75,34 @@ public class ProfesseurService {
         ps.setString(2, "%" + query + "%");
 
         return ps.executeQuery();
+    }
+
+
+    public int findidbyusername(String username) {
+        return professeurDAO.findidbyusername(username);
+    }
+
+    public ResultSet getMdsbyid(int id){
+        return professeurDAO.getMdsbyid(id);
+    }
+
+    public ResultSet getModsbyid(int professeurId) {
+        String query = "SELECT * FROM modules WHERE professeurId = ?";
+        Connection connection = DBConnection.getInstance().getConnection();
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, professeurId);
+            ResultSet rs = stmt.executeQuery();
+
+            // Create a CachedRowSet and populate it with the ResultSet data
+            RowSetFactory factory = RowSetProvider.newFactory();
+            CachedRowSet crs = factory.createCachedRowSet();
+            crs.populate(rs);
+
+            return crs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

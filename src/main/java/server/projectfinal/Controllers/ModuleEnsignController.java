@@ -5,22 +5,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import server.projectfinal.DAO.*;
-import server.projectfinal.Services.EtudiantService;
-import server.projectfinal.Services.InscriptionsService;
 import server.projectfinal.Services.ModuleService;
+import server.projectfinal.Services.ProfesseurService;
 import server.projectfinal.Utils.TableUtil;
-
-import java.sql.ResultSet;
-
+import java.sql.*;
 import static server.projectfinal.Utils.PopupNotification.showError;
-import static server.projectfinal.Utils.TableUtil.exportToCSV;
-import static server.projectfinal.Utils.TableUtil.exportToPDF;
 
-/**
- * This code is written by Salmane Koraichi
- **/
 public class ModuleEnsignController {
 
+    private String username;
 
     @FXML
     private AnchorPane TableContainer;
@@ -28,51 +21,82 @@ public class ModuleEnsignController {
     private TableView<ObservableList<String>> ModuleTable;
 
     private final ModuleService moduleService;
+    private final ProfesseurService ProfesseurService;
 
     public ModuleEnsignController() {
         ModuleDAO moduleDAO = new ModuleDAOImpl();
         this.moduleService = new ModuleService(moduleDAO);
+
+        ProfesseurDAO professeurDAO = new ProfesseurDAOImpl();
+        this.ProfesseurService = new ProfesseurService(professeurDAO);
     }
 
     @FXML
     public void initialize() {
-/*
-        loadInscriptions();
-*/
+
     }
 
-   /* private void loadInscriptions() {
-        try {
-            // Suppose your InscriptionsService can return a ResultSet for all inscriptions
-            ResultSet rs = inscriptionsService.load();
-            // We'll convert that to a TableView:
-            updateTable(rs);
-        } catch (Exception e) {
-            e.printStackTrace();
-            showError("Erreur lors du chargement des inscriptions: " + e.getMessage());
+    /*private void loadmodules() {
+        if (username == null) {
+            showError("Username is not set properly.");
+            return;
         }
+
+        // Fetch ResultSet from service method using the username's associated professor ID
+        int professeurId = ProfesseurService.findidbyusername(username);
+
+        ResultSet rs = ProfesseurService.getMdsbyid(professeurId);
+
+        if (rs != null) {
+            updateTable(rs);
+        } else {
+            showError("No modules found for this professor.");
+        }
+    }*/
+
+    private void loadmodules() {
+        if (username == null) {
+            showError("Username is not set properly.");
+            return;
+        }
+
+        int professeurId = ProfesseurService.findidbyusername(username);
+        ResultSet rs = ProfesseurService.getModsbyid(professeurId);
+
+        if (rs == null) {
+            showError("No modules found for this professor.");
+            return;
+        }
+
+        updateTable(rs);
     }
-*/
-   /* private void updateTable(ResultSet rs) {
+
+
+    private void updateTable(ResultSet rs) {
         try {
             TableContainer.getChildren().clear();
+            ModuleTable = TableUtil.FilloTable(rs);
+            TableContainer.getChildren().add(ModuleTable);
 
-            inscriptionTable = TableUtil.FillTable(rs);
-            TableContainer.getChildren().add(inscriptionTable);
+            // Adjust anchors for table to expand properly
+            AnchorPane.setTopAnchor(ModuleTable, 10.0);
+            AnchorPane.setLeftAnchor(ModuleTable, 10.0);
+            AnchorPane.setRightAnchor(ModuleTable, 10.0);
+            AnchorPane.setBottomAnchor(ModuleTable, 10.0);
 
-            // Ajuster les ancres pour que la table s'étende correctement
-            AnchorPane.setTopAnchor(inscriptionTable, 10.0); // Adjust top margin
-            AnchorPane.setLeftAnchor(inscriptionTable, 10.0); // Adjust left margin
-            AnchorPane.setRightAnchor(inscriptionTable, 10.0); // Adjust right margin
-            AnchorPane.setBottomAnchor(inscriptionTable, 10.0); // Optional for bottom margin
-
-
-            inscriptionTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            ModuleTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
                 boolean selected = (newVal != null);
             });
         } catch (Exception e) {
             e.printStackTrace();
-            showError("Erreur lors de la construction du tableau: " + e.getMessage());
+            showError("Error constructing the table: " + e.getMessage());
         }
-    }*/
+    }
+
+    // Create a method to set the username in the controller
+    public void setUsername(String username) {
+        this.username = username;
+        System.out.println("Logged in as: " + username);
+        loadmodules(); // Call loadmodules here to update the table
+    }
 }

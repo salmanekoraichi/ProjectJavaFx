@@ -11,11 +11,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import static server.projectfinal.Utils.PopupNotification.showError;
 
-/**
- * This code is written by Salmane Koraichi
- **/
 public class ProfesseurDashboardController {
 
+    private String username;
 
     @FXML
     private Button EtdBtn;
@@ -29,30 +27,25 @@ public class ProfesseurDashboardController {
     @FXML
     private BorderPane Borderpane;
 
+    public ProfesseurDashboardController() {}
+
+    @FXML
+    private void initialize() {
+        System.out.println("username = " + username);
+    }
 
     @FXML
     void handleEtd(ActionEvent event) {
         loadView("utilisateur-view.fxml");
-
     }
-
-    @FXML
-    void handleMdl(ActionEvent event) {
-        loadView("utilisateur-view.fxml");
-    }
-
 
     @FXML
     private void handlelogout(ActionEvent event) {
         try {
-            // Close the current stage
             logout.getScene().getWindow().hide();
-
-            // Load the login view
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/server/projectfinal/Views/login-view.fxml"));
             Parent loginView = loader.load();
 
-            // Create a new stage for the login screen
             Stage loginStage = new Stage();
             loginStage.setTitle("Login");
             loginStage.setScene(new Scene(loginView));
@@ -60,26 +53,35 @@ public class ProfesseurDashboardController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            // Optionally, show an alert to the user
             showError("Unable to logout and return to the login screen: " + e.getMessage());
         }
+
+        System.out.println("Log out username = " + username);
     }
 
-    /**
-     * Loads a new view into the center of the BorderPane.
-     *
-     * @param fxml the FXML file to load
-     */
+    @FXML
+    private void handleMdl(ActionEvent event) {
+        loadView("module-enseigne-view.fxml");
+    }
+
     private void loadView(String fxml) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/server/projectfinal/Views/" + fxml));
             Parent view = loader.load();
+
+            ModuleEnsignController controller = loader.getController();
+            controller.setUsername(username); // Pass username to the next controller
+
+            // Set the new view in the BorderPane
             Borderpane.setCenter(view);
         } catch (IOException e) {
             e.printStackTrace();
-            // Optionally, show an alert to the user
         }
     }
 
-
+    // Create a method to set the username in the controller
+    public void setUsername(String username) {
+        this.username = username;
+        System.out.println("Logged in as: " + username);
+    }
 }

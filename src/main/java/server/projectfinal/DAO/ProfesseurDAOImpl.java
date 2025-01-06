@@ -35,6 +35,21 @@ public class ProfesseurDAOImpl implements ProfesseurDAO {
     }
 
     @Override
+    public int findidbyusername(String username) {
+        String query = "SELECT id FROM professeurs WHERE username = ?";
+        try (PreparedStatement pst = connection.prepareStatement(query)) {
+            pst.setString(1, username);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    @Override
     public Professeur findByUsername(String Username) {
         String query = "SELECT * FROM professeurs WHERE Username = ?";
         try (PreparedStatement pst = connection.prepareStatement(query)) {
@@ -128,5 +143,18 @@ public class ProfesseurDAOImpl implements ProfesseurDAO {
         }
         return modules;
     }
+
+    public ResultSet getMdsbyid(int id){
+        String query = "SELECT * FROM modules WHERE professeurId = ?";
+        try (PreparedStatement pst = connection.prepareStatement(query)) {
+            pst.setInt(1, id);
+            return pst.executeQuery(); // Returning the ResultSet without closing it prematurely
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 
 }
