@@ -4,7 +4,7 @@ module server.projectfinal {
     requires java.sql;
     requires java.desktop;
     requires itextpdf;
-
+    requires java.sql.rowset;
 
     opens server.projectfinal to javafx.fxml;
     exports server.projectfinal;

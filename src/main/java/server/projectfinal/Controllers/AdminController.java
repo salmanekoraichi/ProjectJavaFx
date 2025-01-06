@@ -2,11 +2,6 @@ package server.projectfinal.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.XYChart;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -14,19 +9,9 @@ import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import server.projectfinal.Services.DashboardService;
-import server.projectfinal.Services.EtudiantService;
-import server.projectfinal.Services.ProfesseurService;
-import server.projectfinal.Services.InscriptionsService;
-import server.projectfinal.DAO.EtudiantDAO;
-import server.projectfinal.DAO.EtudiantDAOImpl;
-import server.projectfinal.DAO.ProfesseurDAO;
-import server.projectfinal.DAO.ProfesseurDAOImpl;
-import server.projectfinal.DAO.InscriptionDAO;
-import server.projectfinal.DAO.InscriptionDAOImpl;
-
 import java.io.IOException;
-import java.util.Map;
+import static server.projectfinal.Utils.PopupNotification.showError;
+
 
 /**
  * Controller class for the Dashboard view.
@@ -90,6 +75,18 @@ public class AdminController {
         loadView("etudiant-view.fxml");
     }
 
+
+    /**
+     * Handles the action when the "Inscriptions" button is clicked.
+     *
+     * @param event the action event
+     */
+    @FXML
+    private void handleInscriptionsAction(ActionEvent event) {
+        loadView("inscription-view.fxml");
+    }
+
+
     /**
      * Handles the action when the "Professeurs" button is clicked.
      *
@@ -110,15 +107,6 @@ public class AdminController {
         loadView("module-view.fxml");
     }
 
-    /**
-     * Handles the action when the "Inscriptions" button is clicked.
-     *
-     * @param event the action event
-     */
-    @FXML
-    private void handleInscriptionsAction(ActionEvent event) {
-        loadView("inscription-view.fxml");
-    }
 
     /**
      * Handles the action when the "Se déconnecter" button is clicked.
@@ -176,10 +164,4 @@ public class AdminController {
         }
     }
 
-    private void showError(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }

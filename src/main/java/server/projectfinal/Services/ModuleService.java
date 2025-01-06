@@ -75,5 +75,20 @@ public class ModuleService {
 
         return ps.executeQuery();
     }
+
+    public int getModuleIdByName(String nomModule) {
+        String query = "SELECT id FROM modules WHERE nomModule = ?";
+        Connection connection = DBConnection.getInstance().getConnection();
+        try (PreparedStatement pst = connection.prepareStatement(query)) {
+            pst.setString(1, nomModule);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1; // Return -1 if no module is found with the given name
+    }
 }
 

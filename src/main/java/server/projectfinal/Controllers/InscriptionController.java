@@ -12,16 +12,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import server.projectfinal.DAO.InscriptionDAO;
-import server.projectfinal.DAO.InscriptionDAOImpl;
+import server.projectfinal.DAO.*;
 import server.projectfinal.Models.Inscription;
+import server.projectfinal.Services.EtudiantService;
 import server.projectfinal.Services.InscriptionsService;
+import server.projectfinal.Services.ModuleService;
 import server.projectfinal.Utils.TableUtil;
 import static server.projectfinal.Utils.TableUtil.exportToCSV;
 import static server.projectfinal.Utils.TableUtil.exportToPDF;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.Optional;
+import static server.projectfinal.Utils.PopupNotification.showSuccess;
+import static server.projectfinal.Utils.PopupNotification.showError;
 
 /**
  * Manages Inscription table and actions (add/modify/remove).
@@ -40,6 +43,10 @@ public class InscriptionController {
     @FXML
     private TextField searchFieldInscription;
 
+    private final EtudiantService etudiantService;
+    private final ModuleService moduleService;
+
+
 
     // We'll store data in a TableView of string rows (like your approach)
     private TableView<ObservableList<String>> inscriptionTable;
@@ -48,9 +55,12 @@ public class InscriptionController {
 
     public InscriptionController() {
         InscriptionDAO inscriptionDAO = new InscriptionDAOImpl();
-        // If you have a no-arg constructor:
-        // create the service or inject it somehow
+        EtudiantDAO etudiantDAO = new EtudiantDAOImpl();
+        ModuleDAO moduleDAO = new ModuleDAOImpl();
+
         this.inscriptionsService = new InscriptionsService(inscriptionDAO);
+        this.etudiantService = new EtudiantService(etudiantDAO, inscriptionDAO);
+        this.moduleService = new ModuleService(moduleDAO);
     }
 
     @FXML
@@ -107,7 +117,33 @@ public class InscriptionController {
         }
     }
 
+
     @FXML
+    private void handleAddInscription() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                    "/server/projectfinal/Views/dialogs/ajouter-inscription-dialog.fxml"
+            ));
+            Parent root = loader.load();
+
+            AjouterInscriptionController controller = loader.getController();
+            controller.setInscriptionsService(inscriptionsService);
+            controller.setEtudiantService(etudiantService); // Inject EtudiantService
+            controller.setModuleService(moduleService); // Inject ModuleService
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Ajouter Inscription");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            loadInscriptions();
+        } catch (IOException e) {
+            showError("Erreur lors de l'ouverture de la fenêtre d'ajout: " + e.getMessage());
+        }
+    }
+
+    /*@FXML
     private void handleAddInscription() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(
@@ -129,8 +165,7 @@ public class InscriptionController {
         } catch (IOException e) {
             showError("Erreur lors de l'ouverture de la fenêtre d'ajout: " + e.getMessage());
         }
-    }
-
+    }*/
     @FXML
     private void handleModifyInscription() {
         Optional<Inscription> selected = getSelectedInscription();
@@ -147,6 +182,8 @@ public class InscriptionController {
 
             ModifierInscriptionController controller = loader.getController();
             controller.setInscriptionsService(inscriptionsService);
+            controller.setEtudiantService(etudiantService); // Inject EtudiantService
+            controller.setModuleService(moduleService); // Inject ModuleService
             controller.setInscription(selected.get());
 
             Stage stage = new Stage();
@@ -160,6 +197,34 @@ public class InscriptionController {
             showError("Erreur lors de l'ouverture de la fenêtre de modification: " + e.getMessage());
         }
     }
+    /*@FXML
+    private void handleModifyInscription() {
+        Optional<Inscription> selected = getSelectedInscription();
+        if (selected.isEmpty()) {
+            showError("Veuillez sélectionner une inscription à modifier.");
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                    "/server/projectfinal/Views/dialogs/modifier-inscription-dialog.fxml"
+            ));
+            Parent root = loader.load();
+
+            ModifierInscriptionController controller = loader.getController();
+            controller.setInscription(selected.get());
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Modifier Inscription");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            loadInscriptions();
+        } catch (IOException e) {
+            showError("Erreur lors de l'ouverture de la fenêtre de modification: " + e.getMessage());
+        }
+    }*/
 
     @FXML
     private void handleRemoveInscription() {
@@ -178,7 +243,7 @@ public class InscriptionController {
         }
     }
 
-    // Convert the selected TableView row into an Inscription object
+    /*// Convert the selected TableView row into an Inscription object
     private Optional<Inscription> getSelectedInscription() {
         if (inscriptionTable == null) return Optional.empty();
         ObservableList<String> row = inscriptionTable.getSelectionModel().getSelectedItem();
@@ -197,21 +262,40 @@ public class InscriptionController {
             ex.printStackTrace();
             return Optional.empty();
         }
+    }*/
+
+    private Optional<Inscription> getSelectedInscription() {
+        if (inscriptionTable == null) return Optional.empty();
+        ObservableList<String> row = inscriptionTable.getSelectionModel().getSelectedItem();
+        if (row == null) return Optional.empty();
+
+        try {
+            // Assuming columns are: [ID, etudiantNom, moduleNom, dateInscription]
+            // Retrieve etudiantId and moduleId from the database based on names
+            // This requires additional queries or mappings
+            // For simplicity, assume we have a method to retrieve IDs by names
+            EtudiantDAOImpl etudiantDAO = new EtudiantDAOImpl();
+            InscriptionDAOImpl inscription = new InscriptionDAOImpl();
+            EtudiantService EtuSer = new EtudiantService(etudiantDAO,inscription);
+            ModuleDAO md = new ModuleDAOImpl();
+            ModuleService moduleService = new ModuleService(md);
+            int etudiantId = EtuSer.getEtudiantIdByName(row.get(1));
+            int moduleId = moduleService.getModuleIdByName(row.get(2));
+
+            Inscription i = new Inscription();
+            i.setId(Integer.parseInt(row.get(0)));
+            i.setEtudiantId(etudiantId);
+            i.setModuleId(moduleId);
+            i.setDateInscription(row.get(3));
+
+            return Optional.of(i);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Optional.empty();
+        }
     }
 
-    private void showError(String msg) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erreur");
-        alert.setContentText(msg);
-        alert.showAndWait();
-    }
 
-    private void showSuccess(String msg) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Succès");
-        alert.setContentText(msg);
-        alert.showAndWait();
-    }
 
     private void handleSearchInscriptions(String query) {
         try {

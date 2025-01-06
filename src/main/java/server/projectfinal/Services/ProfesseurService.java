@@ -1,10 +1,15 @@
 package server.projectfinal.Services;
 
 import server.projectfinal.DAO.ProfesseurDAO;
+import server.projectfinal.DAO.UtilisateurDAOImpl;
 import server.projectfinal.Models.Modul;
 import server.projectfinal.Models.Professeur;
+import server.projectfinal.Models.Utilisateur;
 import server.projectfinal.Utils.DBConnection;
 
+import javax.sql.rowset.CachedRowSet;
+import javax.sql.rowset.RowSetFactory;
+import javax.sql.rowset.RowSetProvider;
 import java.sql.*;
 import java.util.List;
 
@@ -29,6 +34,12 @@ public class ProfesseurService {
 
     public void addProfesseur(Professeur professeur) {
         professeurDAO.save(professeur);
+        UtilisateurDAOImpl utilisateurDAO = new UtilisateurDAOImpl();
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setUsername(professeur.getUsername());
+        utilisateur.setPassword(professeur.getUsername());
+        utilisateur.setRole("professeur");
+        utilisateurDAO.save(utilisateur);
     }
 
     public void updateProfesseur(Professeur professeur) {
@@ -42,6 +53,8 @@ public class ProfesseurService {
     public List<Modul> getModulesByProfesseur(int professeurId) {
         return professeurDAO.findModulesByProfesseurId(professeurId);
     }
+
+
 
     public ResultSet load(){
         return professeurDAO.load();
@@ -64,4 +77,51 @@ public class ProfesseurService {
         return ps.executeQuery();
     }
 
+
+    public int findidbyusername(String username) {
+        return professeurDAO.findidbyusername(username);
+    }
+
+    public ResultSet getMdsbyid(int id){
+        return professeurDAO.getMdsbyid(id);
+    }
+
+    public ResultSet getModsbyid(int professeurId) {
+        String query = "SELECT * FROM modules WHERE professeurId = ?";
+        Connection connection = DBConnection.getInstance().getConnection();
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, professeurId);
+            ResultSet rs = stmt.executeQuery();
+
+            // Create a CachedRowSet and populate it with the ResultSet data
+            RowSetFactory factory = RowSetProvider.newFactory();
+            CachedRowSet crs = factory.createCachedRowSet();
+            crs.populate(rs);
+
+            return crs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    public ResultSet GetEtudiantsById(int id){
+        String query = "SELECT * FROM etudiants WHERE etudiants.id IN ( SELECT inscriptions.etudiantId FROM inscriptions WHERE inscriptions.moduleId IN ( SELECT modules.id FROM modules WHERE professeurId = ?))";
+        Connection connection = DBConnection.getInstance().getConnection();
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            // Create a CachedRowSet and populate it with the ResultSet data
+            RowSetFactory factory = RowSetProvider.newFactory();
+            CachedRowSet crs = factory.createCachedRowSet();
+            crs.populate(rs);
+
+            return crs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+
+        } }
 }

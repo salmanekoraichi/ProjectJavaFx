@@ -20,12 +20,15 @@ import server.projectfinal.DAO.InscriptionDAOImpl;
 import server.projectfinal.Models.Etudiant;
 import server.projectfinal.Services.EtudiantService;
 import server.projectfinal.Utils.TableUtil;
+import server.projectfinal.Utils.PopupNotification;
+
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.util.Optional;
-
+import static server.projectfinal.Utils.PopupNotification.showSuccess;
+import static server.projectfinal.Utils.PopupNotification.showError;
 import static server.projectfinal.Utils.TableUtil.exportToCSV;
 import static server.projectfinal.Utils.TableUtil.exportToPDF;
 
@@ -235,18 +238,6 @@ public class EtudiantController {
             ex.printStackTrace();
             return Optional.empty();
         }
-    }
-
-    private void showError(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    private void showSuccess(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     private void handleSearchEtudiant(String query) {

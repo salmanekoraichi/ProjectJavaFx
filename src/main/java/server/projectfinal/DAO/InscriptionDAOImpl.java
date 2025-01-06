@@ -87,9 +87,24 @@ public class InscriptionDAOImpl implements InscriptionDAO {
         }
     }
 
-    @Override
+    /*@Override
     public ResultSet load() {
         String query = "SELECT * FROM inscriptions";
+        try {
+            Statement statement = connection.createStatement();
+            return statement.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }*/
+
+    @Override
+    public ResultSet load() {
+        String query = "SELECT i.id, e.nom AS etudiantNom, m.nomModule AS moduleNom, i.dateInscription " +
+                "FROM inscriptions i " +
+                "JOIN etudiants e ON i.etudiantId = e.id " +
+                "JOIN modules m ON i.moduleId = m.id";
         try {
             Statement statement = connection.createStatement();
             return statement.executeQuery(query);

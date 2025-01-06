@@ -7,7 +7,9 @@ import javafx.stage.Stage;
 import server.projectfinal.Models.Etudiant;
 import server.projectfinal.Models.Inscription;
 import server.projectfinal.Models.Modul;
+import server.projectfinal.Services.EtudiantService;
 import server.projectfinal.Services.InscriptionsService;
+import server.projectfinal.Services.ModuleService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -25,7 +27,10 @@ public class AjouterInscriptionController {
     @FXML
     private DatePicker dateInscriptionPicker;
 
-    private InscriptionsService inscriptionsService; // we assume you'll set this from outside
+    private InscriptionsService inscriptionsService;
+
+    private EtudiantService etudiantS;
+    private ModuleService ms;  // we assume you'll set this from outside
 
     /**
      * Called after FXML load. You can fill the combos here, or
@@ -33,22 +38,50 @@ public class AjouterInscriptionController {
      */
     @FXML
     private void initialize() {
+        // Initialize the comboboxes with data
+        if (inscriptionsService != null) {
+            List<Etudiant> etudiants = etudiantS.getAllEtudiants();
+            List<Modul> modules = ms.getAllModules();
+            etudiantCombo.getItems().setAll(etudiants);
+            moduleCombo.getItems().setAll(modules);
+        }
+    }
+
+
+    /*private void initialize() {
         // Example:
         //etudiantCombo.getItems().addAll(...some list of Etudiant...);
         //moduleCombo.getItems().addAll(...some list of Module...);
-    }
+    }*/
 
-    public void setInscriptionsService(InscriptionsService service) {
-        this.inscriptionsService = service;
-        // If you want, load data from DB here:
-        //   List<Etudiant> allEtudiants = ...
-        //   etudiantCombo.getItems().setAll(allEtudiants);
-        //   List<Module> allModules = ...
-        //   moduleCombo.getItems().setAll(allModules);
-    }
 
     @FXML
     private void handleAjouterInscription() {
+        try {
+            Inscription i = new Inscription();
+
+            Etudiant selectedEtudiant = etudiantCombo.getValue();
+            Modul selectedModule = moduleCombo.getValue();
+            LocalDate selectedDate = dateInscriptionPicker.getValue();
+
+            if (selectedEtudiant != null) {
+                i.setEtudiantId(selectedEtudiant.getId());
+            }
+            if (selectedModule != null) {
+                i.setModuleId(selectedModule.getId());
+            }
+            if (selectedDate != null) {
+                i.setDateInscription(selectedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            }
+
+            inscriptionsService.addInscription(i);
+            closeDialog();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Show an alert if desired
+        }
+    }
+    /*private void handleAjouterInscription() {
         try {
             // Build the Inscription from combos + date
             Inscription i = new Inscription();
@@ -75,10 +108,33 @@ public class AjouterInscriptionController {
             e.printStackTrace();
             // Show an alert if desired
         }
-    }
+    }*/
 
     private void closeDialog() {
         Stage stage = (Stage) dateInscriptionPicker.getScene().getWindow();
         stage.close();
+    }
+
+    private void initializeComboboxes() {
+        if (etudiantS != null && ms != null) {
+            List<Etudiant> etudiants = etudiantS.getAllEtudiants();
+            List<Modul> modules = ms.getAllModules();
+            etudiantCombo.getItems().setAll(etudiants);
+            moduleCombo.getItems().setAll(modules);
+        }
+    }
+
+    public void setInscriptionsService(InscriptionsService service) {
+        this.inscriptionsService = service;
+    }
+
+    public void setEtudiantService(EtudiantService etudiantService) {
+        this.etudiantS = etudiantService;
+        initializeComboboxes(); // Load data when the service is set
+    }
+
+    public void setModuleService(ModuleService moduleService) {
+        this.ms = moduleService;
+        initializeComboboxes(); // Load data when the service is set
     }
 }

@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="SceneContainer" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.projectfinal.Controllers.DashboardController">
+<AnchorPane fx:id="SceneContainer" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.projectfinal.Controllers.DashboardController">
    <children>
       <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="175.0" prefWidth="822.0" stylesheets="@../design/MainForm.css" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <children>
@@ -146,7 +142,7 @@
             <String fx:value="shadow" />
          </styleClass>
          <children>
-            <LineChart fx:id="lineChartModulesProf" layoutX="0.0" layoutY="0.0" prefHeight="246.0" prefWidth="399.0" title="Modules Enseignés par Prof" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <LineChart fx:id="lineChartModulesProf" layoutX="0.0" layoutY="-71.0" prefHeight="237.0" prefWidth="399.0" title="Modules Enseignés par Prof" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <xAxis>
                   <CategoryAxis side="BOTTOM" />
                </xAxis>
