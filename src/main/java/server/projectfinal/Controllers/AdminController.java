@@ -147,6 +147,12 @@ public class AdminController {
         loadView("utilisateur-view.fxml");
     }
 
+    @FXML
+    private void handleAiAction(ActionEvent event) {
+        // Implement logout logic, such as returning to the login screen
+        loadView("Aiview.fxml");
+    }
+
 
     /**
      * Loads a new view into the center of the BorderPane.
