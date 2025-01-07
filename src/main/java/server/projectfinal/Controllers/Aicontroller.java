@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -19,6 +20,9 @@ public class Aicontroller {
     private TextField promptField;
 
     @FXML
+    private ComboBox<String> roleSelector; // Dropdown for role selection
+
+    @FXML
     private Button sendButton;
 
     @FXML
@@ -26,13 +30,24 @@ public class Aicontroller {
 
     @FXML
     public void initialize() {
+        // Populate the role selector
+        roleSelector.getItems().addAll("Professor", "Admin", "Secretary");
+        roleSelector.setValue("Professor"); // Default role
+
         sendButton.setOnAction(event -> sendPrompt());
     }
 
     private void sendPrompt() {
         String prompt = promptField.getText();
+        String selectedRole = roleSelector.getValue().toLowerCase();
+
         if (prompt.isBlank()) {
             showAlert("Error", "Prompt field cannot be empty.");
+            return;
+        }
+
+        if (selectedRole.isBlank()) {
+            showAlert("Error", "Please select a role.");
             return;
         }
 
@@ -45,9 +60,12 @@ public class Aicontroller {
             json.addProperty("prompt", prompt);
             String requestBody = new Gson().toJson(json);
 
+            // Map selected role to its corresponding endpoint
+            String endpointUrl = "http://127.0.0.1:5000/" + selectedRole;
+
             // Create POST request
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://127.0.0.1:5000/generate"))
+                    .uri(URI.create(endpointUrl))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .build();
