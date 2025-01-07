@@ -72,10 +72,10 @@ public class ProfesseurDashboardController {
             // Correctly retrieve the controller based on the fxml
             if (fxml.equals("module-enseigne-view.fxml")) {
                 ModuleEnsignController controller = loader.getController();
-                controller.setUsername(username);
-            } else if (fxml.equals("utilisateur-view.fxml")) {
+                controller.setUsernamemdl(username);
+            } else if (fxml.equals("etudiant-enseigne-view.fxml")) {
                 EtudiantEnsignController controller = loader.getController();
-                controller.setUsername(username);
+                controller.setUsernameetd(username);
             }
             // Set the new view in the BorderPane
             Borderpane.setCenter(view);
@@ -85,7 +85,7 @@ public class ProfesseurDashboardController {
     }
 
     // Create a method to set the username in the controller
-    public void setUsername(String username) {
+    public void setUsernamee(String username) {
         this.username = username;
         System.out.println("Logged in as: " + username);
     }

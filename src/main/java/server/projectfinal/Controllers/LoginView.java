@@ -67,7 +67,7 @@ public class LoginView {
 
                 if(role.equals("professor")) {
                     ProfesseurDashboardController controller = loader.getController();
-                    controller.setUsername(usernameField.getText());
+                    controller.setUsernamee(usernameField.getText());
                 }
 
                 // Set the new scene

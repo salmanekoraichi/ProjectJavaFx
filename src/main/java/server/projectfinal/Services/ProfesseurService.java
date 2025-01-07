@@ -111,6 +111,8 @@ public class ProfesseurService {
 //here
 
     public ResultSet GetEtudiantsById(int id){
+
+        System.out.println("getetudiantbyid called !!");
         String query = "SELECT * FROM etudiants WHERE etudiants.id IN ( SELECT inscriptions.etudiantId FROM inscriptions WHERE inscriptions.moduleId IN ( SELECT modules.id FROM modules WHERE professeurId = ?))";
         Connection connection = DBConnection.getInstance().getConnection();
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -121,11 +123,12 @@ public class ProfesseurService {
             RowSetFactory factory = RowSetProvider.newFactory();
             CachedRowSet crs = factory.createCachedRowSet();
             crs.populate(rs);
-
+            System.out.println("getetudiantbyid called !!");
             return crs;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
 
-        } }
+        }
+    }
 }

@@ -94,9 +94,9 @@ public class ModuleEnsignController {
     }
 
     // Create a method to set the username in the controller
-    public void setUsername(String username) {
+    public void setUsernamemdl(String username) {
         this.username = username;
-        System.out.println("Logged in as: " + username);
+        System.out.println("Logged in mas: " + username);
         loadmodules(); // Call loadmodules here to update the table
     }
 }

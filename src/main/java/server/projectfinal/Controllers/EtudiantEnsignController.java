@@ -69,10 +69,10 @@ public class EtudiantEnsignController {
             showError("Username is not set properly.");
             return;
         }
-
+        System.out.println("loadetudiant callini");
         int professeurId = ProfesseurService.findidbyusername(username);
         ResultSet rs = ProfesseurService.GetEtudiantsById(professeurId);
-
+        System.out.println("loadetudiant sir 3la lah");
         if (rs == null) {
             showError("No modules found for this professor.");
             return;
@@ -85,7 +85,7 @@ public class EtudiantEnsignController {
     private void updateTable(ResultSet rs) {
         try {
             TableContainer.getChildren().clear();
-            etudiant_table = TableUtil.FilloTable(rs);
+            etudiant_table = TableUtil.FillTable(rs);
             TableContainer.getChildren().add(etudiant_table);
 
             // Adjust anchors for table to expand properly
@@ -104,9 +104,9 @@ public class EtudiantEnsignController {
     }
 
     // Create a method to set the username in the controller
-    public void setUsername(String username) {
+    public void setUsernameetd(String username) {
         this.username = username;
-        System.out.println("Logged in as: " + username);
+        System.out.println("Logged in aaaaas: " + username);
         loadetudiant(); // Call loadmodules here to update the table
     }
 }
