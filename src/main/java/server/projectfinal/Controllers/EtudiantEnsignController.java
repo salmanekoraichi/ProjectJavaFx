@@ -48,6 +48,9 @@ public class EtudiantEnsignController {
 
     @FXML
     public void initialize() {
+        searchFieldEtudiant.textProperty().addListener((obs, oldV, newV) -> {
+            handleSearchEtudiant(newV);
+        });
 
     }
 
