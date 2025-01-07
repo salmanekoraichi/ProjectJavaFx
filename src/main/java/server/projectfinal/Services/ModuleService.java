@@ -58,20 +58,26 @@ public class ModuleService {
     public ResultSet searchModules(String query) throws SQLException {
         // Suppose columns: id, nomModule, codeModule, professeurId, ...
         // Maybe also join with professeur table to search by prof name.
+        Connection connection = DBConnection.getInstance().getConnection();
+/**
+ * fzt : changes to make it work
+ */
         String sql =
                 "SELECT m.* "
-                        + "FROM module m "
-                        + "JOIN professeur p ON m.professeur_id = p.id "
+                        + "FROM modules m "
+                        + "LEFT JOIN professeurs p ON m.professeurId = p.id "
                         + "WHERE m.nomModule LIKE ? "
                         + "   OR m.codeModule LIKE ? "
                         + "   OR p.nom LIKE ? "
-                        + "   OR p.prenom LIKE ?";
-        Connection connection = DBConnection.getInstance().getConnection();
+                        + "   OR p.prenom LIKE ? ";
         PreparedStatement ps = connection.prepareStatement(sql);
+
         ps.setString(1, "%" + query + "%");
         ps.setString(2, "%" + query + "%");
         ps.setString(3, "%" + query + "%");
         ps.setString(4, "%" + query + "%");
+
+
 
         return ps.executeQuery();
     }

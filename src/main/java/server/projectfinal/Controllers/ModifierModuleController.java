@@ -33,6 +33,7 @@ public class ModifierModuleController {
 
     @FXML
     private void initialize() {
+
         // We'll load the combobox from setProfesseurService
     }
 
@@ -50,6 +51,7 @@ public class ModifierModuleController {
         List<Professeur> profs = professeurService.getAllProfesseurs();
         ProfesseurModule.getItems().setAll(profs);
     }
+
 
     /**
      * Called by ModuleController after loading the FXML

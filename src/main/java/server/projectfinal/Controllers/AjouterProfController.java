@@ -56,7 +56,7 @@ public class AjouterProfController {
     private void ajouter() {
         System.out.println(">>> handleAjouter() was called! <<<");
         try {
-            // Create a new Etudiant object from fields
+            // Create a new Professeur object from fields
             Professeur Nvprofesseur = new Professeur();
             Nvprofesseur.setNom(nomprofadd.getText());
             Nvprofesseur.setPrenom(prenomprofadd.getText());

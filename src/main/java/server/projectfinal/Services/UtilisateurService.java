@@ -74,16 +74,17 @@ public class UtilisateurService {
 
 
     public ResultSet searchUtilisateurs(String query) throws SQLException {
-        // Suppose columns: id, username, password, role, ...
+        Connection connection = DBConnection.getInstance().getConnection();
+
         String sql =
-                "SELECT * FROM utilisateur "
+                "SELECT * FROM utilisateurs " // Corrected table name
                         + "WHERE username LIKE ? "
                         + "   OR role LIKE ?";
-        Connection connection = DBConnection.getInstance().getConnection();
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, "%" + query + "%");
         ps.setString(2, "%" + query + "%");
-        return ps.executeQuery();
+        ResultSet rs = ps.executeQuery();
+        return rs;
     }
 
 

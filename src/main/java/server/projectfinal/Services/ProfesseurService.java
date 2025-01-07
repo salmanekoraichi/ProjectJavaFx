@@ -37,8 +37,9 @@ public class ProfesseurService {
         UtilisateurDAOImpl utilisateurDAO = new UtilisateurDAOImpl();
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.setUsername(professeur.getUsername());
+        //should be random
         utilisateur.setPassword(professeur.getUsername());
-        utilisateur.setRole("professeur");
+        utilisateur.setRole("professor");
         utilisateurDAO.save(utilisateur);
     }
 
@@ -67,12 +68,15 @@ public class ProfesseurService {
         // And you want to find any row where nom LIKE '%query%' OR prenom LIKE '%query%', etc.
         Connection connection = DBConnection.getInstance().getConnection();
         String sql = "SELECT * FROM professeurs "
-                + "WHERE nom LIKE ? OR prenom LIKE ?";
+                + "WHERE nom LIKE ? OR prenom LIKE ? OR specialite LIKE ? ";
+
         PreparedStatement ps = connection.prepareStatement(sql);
 
 // Now you have *2* placeholders
         ps.setString(1, "%" + query + "%");
         ps.setString(2, "%" + query + "%");
+        ps.setString(3, "%" + query + "%");
+
 
         return ps.executeQuery();
     }
@@ -104,7 +108,7 @@ public class ProfesseurService {
             return null;
         }
     }
-
+//here
 
     public ResultSet GetEtudiantsById(int id){
         String query = "SELECT * FROM etudiants WHERE etudiants.id IN ( SELECT inscriptions.etudiantId FROM inscriptions WHERE inscriptions.moduleId IN ( SELECT modules.id FROM modules WHERE professeurId = ?))";

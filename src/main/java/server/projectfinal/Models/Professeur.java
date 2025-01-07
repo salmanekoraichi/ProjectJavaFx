@@ -65,7 +65,7 @@ public class Professeur {
     public String toString() {
         return "id=" + id +
                 ", nom='" + nom + '\'' +
-                ", prenom='" + prenom ;
+                ", prenom='" + prenom + '\'';
     }
 
 }

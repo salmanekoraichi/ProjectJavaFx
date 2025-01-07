@@ -26,19 +26,20 @@ public class AjouterModuleController {
     @FXML
     private ComboBox<Professeur> ProfesseurModuleAjout;
 
-    private ModuleService moduleService;
+    private ModuleService moduleService; // Corrected type from Modul to ModuleService
     private ProfesseurService professeurService;
-
     // Called automatically by JavaFX after FXML loads
     @FXML
     private void initialize() {
-        // We'll fill the combobox later once we have services
+        // Debugging: Ensure the ComboBox is not null
+        if (ProfesseurModuleAjout == null) {
+            System.out.println("ProfesseurModuleAjout is null in initialize()");
+        }
     }
 
     // Set the services from outside (ModuleController)
     public void setModuleService(ModuleService moduleService) {
         this.moduleService = moduleService;
-        // Possibly load combos here if not done in code
     }
 
     public void setProfesseurService(ProfesseurService professeurService) {
@@ -47,9 +48,16 @@ public class AjouterModuleController {
     }
 
     private void loadProfesseursIntoCombo() {
-        if (professeurService == null) return;
+        if (professeurService == null) {
+            System.out.println("ProfesseurService is null in loadProfesseursIntoCombo()");
+            return;
+        }
+        if (ProfesseurModuleAjout == null) {
+            System.out.println("ProfesseurModuleAjout is null in loadProfesseursIntoCombo()");
+            return;
+        }
         List<Professeur> profs = professeurService.getAllProfesseurs();
-        // Populate combo
+        System.out.println("Professors loaded: " + profs.size());
         ProfesseurModuleAjout.getItems().setAll(profs);
     }
 
@@ -68,6 +76,10 @@ public class AjouterModuleController {
             }
 
             // Save to DB
+            if (moduleService == null) {
+                System.out.println("moduleService is null in handleAjouterModule()");
+                return;
+            }
             moduleService.addModule(newModule);
 
             // Close dialog

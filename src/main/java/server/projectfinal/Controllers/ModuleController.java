@@ -133,6 +133,11 @@ public class ModuleController {
             // Show the dialog
             Parent root = loader.load();
             AjouterModuleController controller = loader.getController();
+            /**
+             * FZT : fixing bugs
+             */
+            controller.setModuleService(moduleService);
+            controller.setProfesseurService(professeurService);
 
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
