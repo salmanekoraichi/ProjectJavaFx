@@ -80,11 +80,13 @@ public class ProfesseurDAOImpl implements ProfesseurDAO {
 
     @Override
     public void save(Professeur professeur) {
-        String query = "INSERT INTO professeurs (specialite, nom, prenom) VALUES (?, ?, ?)";
+        String query = "INSERT INTO professeurs (specialite, nom, prenom , username ) VALUES (?, ?, ? , ?)";
         try (PreparedStatement pst = connection.prepareStatement(query)) {
             pst.setString(1, professeur.getSpecialite());
             pst.setString(2, professeur.getNom());
             pst.setString(3, professeur.getPrenom());
+            pst.setString(4, professeur.getUsername());
+
             pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -93,12 +95,15 @@ public class ProfesseurDAOImpl implements ProfesseurDAO {
 
     @Override
     public void update(Professeur professeur) {
-        String query = "UPDATE professeurs SET specialite = ?, nom = ?, prenom = ? WHERE id = ?";
+        String query = "UPDATE professeurs SET specialite = ?, nom = ?, prenom = ? , username=? WHERE id = ?";
         try (PreparedStatement pst = connection.prepareStatement(query)) {
             pst.setString(1, professeur.getSpecialite());
             pst.setString(2, professeur.getNom());
             pst.setString(3, professeur.getPrenom());
-            pst.setInt(4, professeur.getId());
+            pst.setString(4, professeur.getUsername());
+
+
+            pst.setInt(5, professeur.getId());
             pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

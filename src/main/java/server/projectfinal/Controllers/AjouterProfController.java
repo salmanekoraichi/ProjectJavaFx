@@ -61,6 +61,7 @@ public class AjouterProfController {
             Nvprofesseur.setNom(nomprofadd.getText());
             Nvprofesseur.setPrenom(prenomprofadd.getText());
             Nvprofesseur.setSpecialite(specialiteprofadd.getText());
+            Nvprofesseur.setUsername();
 
             // Save the new prof via service
             professeurService.addProfesseur(Nvprofesseur);

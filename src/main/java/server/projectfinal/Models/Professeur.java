@@ -18,7 +18,7 @@ public class Professeur {
         this.specialite = specialite;
         this.nom = nom;
         this.prenom = prenom;
-        this.Username = nom+"."+prenom;
+        setUsername(); // Generate username after setting nom and prenom
     }
 
     public int getId() {
@@ -56,8 +56,8 @@ public class Professeur {
     public String getUsername() {
         return Username;
     }
-    public void setUsername(String username) {
-        Username = username;
+    public void setUsername (){
+        Username = this.nom+"."+this.prenom;
     }
 
 

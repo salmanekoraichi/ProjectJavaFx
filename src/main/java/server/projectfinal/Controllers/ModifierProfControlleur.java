@@ -44,7 +44,7 @@ public class ModifierProfControlleur {
     }
 
     /**
-     * Populate fields with the selected student’s data.
+     * Populate fields with the selected Professor’s data.
      */
     public void setProfesseur(Professeur professeur) {
         this.professeur = professeur;
@@ -63,7 +63,11 @@ public class ModifierProfControlleur {
         try {
             professeur.setNom(Nomprofmofid.getText());
             professeur.setPrenom(Prenomprofmofid.getText());
-            specialiteprofmofid.setText(professeur.getSpecialite());
+            professeur.setSpecialite(specialiteprofmofid.getText());
+            System.out.println(professeur.getUsername());
+            professeur.setUsername();
+            System.out.println(professeur.getUsername());
+
 
             // Update in DB
             professeurService.updateProfesseur(professeur);

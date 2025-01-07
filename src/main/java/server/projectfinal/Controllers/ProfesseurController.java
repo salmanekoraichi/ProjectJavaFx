@@ -15,6 +15,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import server.projectfinal.DAO.*;
 import server.projectfinal.Models.Etudiant;
+import server.projectfinal.Models.Professeur;
 import server.projectfinal.Services.EtudiantService;
 import server.projectfinal.Services.ProfesseurService;
 import server.projectfinal.Utils.TableUtil;
@@ -143,7 +144,7 @@ public class ProfesseurController {
     @FXML
     private void handleAddprof() {
         try {
-            System.out.println("handleAddStudent called!");
+            System.out.println("handleAddProf called!");
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/server/projectfinal/Views/dialogs/ajouter-professeur-dialog.fxml")
             );
@@ -154,7 +155,7 @@ public class ProfesseurController {
             System.out.println("chichi prof called!");
 
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Ajouter Étudiant");
+            stage.setTitle("Ajouter Professeur");
             stage.setScene(new Scene(root));
             stage.showAndWait();
 
@@ -171,31 +172,31 @@ public class ProfesseurController {
 
     @FXML
     private void handleModifyprof() {
-        Optional<Etudiant> selectedStudent = getSelectedStudent();
-        if (selectedStudent.isEmpty()) {
-            showError("Veuillez sélectionner un étudiant à modifier.");
+        Optional<Professeur> selectedProf = getSelectedStudent();
+        if (selectedProf.isEmpty()) {
+            showError("Veuillez sélectionner un Professeur à modifier.");
             return;
         }
 
         try {
             // Créez les DAO nécessaires
-            EtudiantDAO etudiantDAO = new EtudiantDAOImpl();
+            ProfesseurDAO profDAO = new ProfesseurDAOImpl();
             InscriptionDAO inscriptionDAO = new InscriptionDAOImpl();
 
             // Créez l'instance du service
-            EtudiantService etudiantService = new EtudiantService(etudiantDAO, inscriptionDAO);
+            ProfesseurService profService = new ProfesseurService(profDAO);
 
             // Configurez le FXMLLoader pour passer le service
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/server/projectfinal/Views/dialogs/modifier-professeur-dialog.fxml"));
-            loader.setControllerFactory(param -> new ModifierEtudiantController(etudiantService));
+            loader.setControllerFactory(param -> new ModifierProfControlleur(profService));
 
             Parent root = loader.load();
 
-            ModifierEtudiantController controller = loader.getController();
-            controller.setEtudiant(selectedStudent.get());
+            ModifierProfControlleur controller = loader.getController();
+            controller.setProfesseur(selectedProf.get());
 
             Stage stage = new Stage();
-            stage.setTitle("Modifier Étudiant");
+            stage.setTitle("Modifier Professeur");
             stage.setScene(new Scene(root));
             stage.showAndWait();
 
@@ -209,7 +210,7 @@ public class ProfesseurController {
     @FXML
     private void handleRemoveprof() {
         // Vérifier la sélection d'un étudiant.
-        Optional<Etudiant> selectedStudent = getSelectedStudent();
+        Optional<Professeur> selectedStudent = getSelectedStudent();
         if (selectedStudent.isEmpty()) {
             showError("Veuillez sélectionner un étudiant à supprimer.");
             return;
@@ -221,7 +222,7 @@ public class ProfesseurController {
     }
 
 
-    private Optional<Etudiant> getSelectedStudent() {
+    private Optional<Professeur> getSelectedStudent() {
         // 1) Grab the selected row from the table
         ObservableList<String> row = profTable.getSelectionModel().getSelectedItem();
         if (row == null) {
@@ -230,14 +231,11 @@ public class ProfesseurController {
 
         try {
             // 2) Build an Etudiant from the columns
-            Etudiant e = new Etudiant();
+            Professeur e = new Professeur();
             e.setId(Integer.parseInt(row.get(0)));     // parse the first column for ID
-            e.setMatricule(row.get(1));
-            e.setNom(row.get(2));
-            e.setPrenom(row.get(3));
-            e.setDateNaissance(row.get(4));
-            e.setEmail(row.get(5));
-            e.setPromotion(row.get(6));
+            e.setNom(row.get(1));
+            e.setPrenom(row.get(2));
+            e.setSpecialite(row.get(3));
 
             return Optional.of(e);
 
