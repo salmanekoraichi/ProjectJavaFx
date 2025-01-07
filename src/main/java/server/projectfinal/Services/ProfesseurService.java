@@ -131,4 +131,22 @@ public class ProfesseurService {
 
         }
     }
+
+
+    public ResultSet searchEtudiants(String query) throws SQLException {
+        // If you want multi-criteria: search by nom, prenom, promotion, or matricule, etc.
+        String sql = "SELECT * FROM etudiants WHERE etudiants.id IN ("
+                + "SELECT inscriptions.etudiantId FROM inscriptions WHERE inscriptions.moduleId IN ("
+                + "SELECT modules.id FROM modules WHERE professeurId = ?)) "
+                + "AND (nom LIKE ? OR prenom LIKE ? OR promotion LIKE ? OR matricule LIKE ?)";
+        Connection connection = DBConnection.getInstance().getConnection();
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, "%" + query + "%"); // ProfesseurId
+        ps.setString(2, "%" + query + "%"); // nom
+        ps.setString(3, "%" + query + "%"); // prenom
+        ps.setString(4, "%" + query + "%"); // promotion
+        ps.setString(5, "%" + query + "%"); // matricule
+        return ps.executeQuery();
+    }
+
 }

@@ -3,6 +3,7 @@ package server.projectfinal.Controllers;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import server.projectfinal.DAO.ModuleDAO;
 import server.projectfinal.DAO.ModuleDAOImpl;
@@ -27,6 +28,10 @@ public class EtudiantEnsignController {
 
     @FXML
     private AnchorPane TableContainer;
+
+
+    @FXML
+    private TextField searchFieldEtudiant;
 
     private TableView<ObservableList<String>> etudiant_table;
 
@@ -109,4 +114,21 @@ public class EtudiantEnsignController {
         System.out.println("Logged in aaaaas: " + username);
         loadetudiant(); // Call loadmodules here to update the table
     }
+
+
+    @FXML
+    private void handleSearchEtudiant(String query) {
+        try {
+            if (query == null || query.trim().isEmpty()) {
+                loadetudiant(); // revert to all
+                return;
+            }
+            ResultSet rs = ProfesseurService.searchEtudiants(query);
+            updateTable(rs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
