@@ -51,7 +51,6 @@ public class EtudiantEnsignController {
         searchFieldEtudiant.textProperty().addListener((obs, oldV, newV) -> {
             handleSearchEtudiant(newV);
         });
-
     }
 
     /*private void loadmodules() {
@@ -87,6 +86,11 @@ public class EtudiantEnsignController {
         }
 
         updateTable(rs);
+
+        searchFieldEtudiant.textProperty().addListener((obs, oldV, newV) -> {
+            System.out.println("called searchFieldEtudiant");
+            handleSearchEtudiant(newV);
+        });
     }
 
 
