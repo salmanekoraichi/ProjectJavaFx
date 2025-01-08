@@ -9,6 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import java.awt.event.ActionEvent;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -20,34 +21,17 @@ public class Aicontroller {
     private TextField promptField;
 
     @FXML
-    private ComboBox<String> roleSelector; // Dropdown for role selection
+    private TextField responseArea;
 
     @FXML
     private Button sendButton;
 
     @FXML
-    private TextArea responseArea;
-
-    @FXML
-    public void initialize() {
-        // Populate the role selector
-        roleSelector.getItems().addAll("Professor", "Admin", "Secretary");
-        roleSelector.setValue("Professor"); // Default role
-
-        sendButton.setOnAction(event -> sendPrompt());
-    }
-
-    private void sendPrompt() {
+    void sendPrompt() {
         String prompt = promptField.getText();
-        String selectedRole = roleSelector.getValue().toLowerCase();
 
         if (prompt.isBlank()) {
             showAlert("Error", "Prompt field cannot be empty.");
-            return;
-        }
-
-        if (selectedRole.isBlank()) {
-            showAlert("Error", "Please select a role.");
             return;
         }
 
@@ -61,7 +45,7 @@ public class Aicontroller {
             String requestBody = new Gson().toJson(json);
 
             // Map selected role to its corresponding endpoint
-            String endpointUrl = "http://127.0.0.1:5000/" + selectedRole;
+            String endpointUrl = "http://127.0.0.1:5000/professor";
 
             // Create POST request
             HttpRequest request = HttpRequest.newBuilder()
@@ -88,7 +72,16 @@ public class Aicontroller {
             e.printStackTrace();
             showAlert("Error", "An error occurred: " + e.getMessage());
         }
+
     }
+
+
+
+    @FXML
+    public void initialize() {
+        sendButton.setOnAction(event -> sendPrompt());
+    }
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
