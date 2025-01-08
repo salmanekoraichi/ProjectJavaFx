@@ -21,7 +21,7 @@ public class Aicontroller {
     private TextField promptField;
 
     @FXML
-    private TextField responseArea;
+    private TextArea responseArea;
 
     @FXML
     private Button sendButton;
