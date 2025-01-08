@@ -7,12 +7,20 @@
     -fx-background-color: #000;
 }
 
+.transparent {
+    -fx-background-color: transparent;
+}
+
 .white-bg{
     -fx-background-color: #fff;
 }
 
 .radius{
     -fx-background-radius: 8px;
+}
+
+.radius100{
+    -fx-background-radius: 100px;
 }
 
 .shadow{
@@ -32,6 +40,26 @@
 }
 .btn:hover{
     -fx-background-color: linear-gradient(to bottom right, #0abfa4, #00d079);
+}
+
+.ai-btn {
+    -fx-background-color: white;
+    -fx-background-radius: 100px;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.5), 100, 0, 0, 0);
+    -fx-cursor: hand;
+}
+
+.send-btn {
+    -fx-background-color: linear-gradient(to bottom, #274f72, #143650);
+    -fx-background-repeat: no-repeat;
+    -fx-background-radius: 100px;
+    -fx-cursor: hand;
+}
+
+.send-btn:hover {
+    -fx-background-color: linear-gradient(to bottom, #274f72, #143650);
+    -fx-opacity: 90%;
 }
 
 .btn-danger {
