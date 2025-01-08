@@ -3,6 +3,7 @@ package server.projectfinal.Controllers;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import server.projectfinal.DAO.ModuleDAO;
 import server.projectfinal.DAO.ModuleDAOImpl;
@@ -28,6 +29,10 @@ public class EtudiantEnsignController {
     @FXML
     private AnchorPane TableContainer;
 
+
+    @FXML
+    private TextField searchFieldEtudiant;
+
     private TableView<ObservableList<String>> etudiant_table;
 
     private final ModuleService moduleService;
@@ -43,7 +48,9 @@ public class EtudiantEnsignController {
 
     @FXML
     public void initialize() {
-
+        searchFieldEtudiant.textProperty().addListener((obs, oldV, newV) -> {
+            handleSearchEtudiant(newV);
+        });
     }
 
     /*private void loadmodules() {
@@ -79,6 +86,11 @@ public class EtudiantEnsignController {
         }
 
         updateTable(rs);
+
+        searchFieldEtudiant.textProperty().addListener((obs, oldV, newV) -> {
+            System.out.println("called searchFieldEtudiant");
+            handleSearchEtudiant(newV);
+        });
     }
 
 
@@ -109,4 +121,21 @@ public class EtudiantEnsignController {
         System.out.println("Logged in aaaaas: " + username);
         loadetudiant(); // Call loadmodules here to update the table
     }
+
+
+    @FXML
+    private void handleSearchEtudiant(String query) {
+        try {
+            if (query == null || query.trim().isEmpty()) {
+                loadetudiant(); // revert to all
+                return;
+            }
+            ResultSet rs = ProfesseurService.searchEtudiants(query);
+            updateTable(rs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
