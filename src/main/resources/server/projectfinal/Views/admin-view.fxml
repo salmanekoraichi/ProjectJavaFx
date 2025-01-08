@@ -10,8 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.projectfinal.Controllers.AdminController">
+<AnchorPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.projectfinal.Controllers.AdminController">
     <children>
         <AnchorPane layoutX="150.0" layoutY="54.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -51,15 +50,17 @@
                                         <Font size="18.0" />
                                     </font>
                                 </Label>
-                                <Button fx:id="AskAi" layoutX="380.0" layoutY="3.0" mnemonicParsing="false" onAction="#handleAiAction" prefHeight="45.0" prefWidth="210.0" styleClass="nav-btn" stylesheets="@../design/MainForm.css">
-                                    <graphic>
-                                        <ImageView fitHeight="23.0" fitWidth="26.0">
-                                            <image>
-                                                <Image url="@../images/generate2.png" />
-                                            </image>
-                                        </ImageView>
-                                    </graphic>
-                                </Button>
+                        <Button fx:id="AskAi" layoutX="970.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleAiAction" prefHeight="24.0" prefWidth="0.0" styleClass="ai-btn" stylesheets="@../design/MainForm.css" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="8.0">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true" styleClass="transparent">
+                                 <image>
+                                    <Image url="@../images/generat.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                             </children>
                         </AnchorPane>
                     </top>
