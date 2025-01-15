@@ -1,5 +1,6 @@
 package server.projectfinal.Controllers;
 
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +26,10 @@ import java.sql.ResultSet;
 import java.util.Optional;
 import static server.projectfinal.Utils.PopupNotification.showSuccess;
 import static server.projectfinal.Utils.PopupNotification.showError;
+=======
+import server.projectfinal.Services.InscriptionsService;
+
+
 
 /**
  * Manages Inscription table and actions (add/modify/remove).
@@ -312,4 +317,7 @@ public class InscriptionController {
             showError("Erreur lors de la recherche : " + e.getMessage());
         }
     }
+
+public class InscriptionController {
+
 }

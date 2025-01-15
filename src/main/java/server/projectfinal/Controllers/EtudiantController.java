@@ -32,6 +32,7 @@ import static server.projectfinal.Utils.PopupNotification.showError;
 import static server.projectfinal.Utils.TableUtil.exportToCSV;
 import static server.projectfinal.Utils.TableUtil.exportToPDF;
 
+
 /**
  * This code is written by Salmane Koraichi
  **/
@@ -44,6 +45,7 @@ public class EtudiantController {
     private AnchorPane TableContainer;
 
     @FXML
+
     private Button btnAdd;
 
 
@@ -160,9 +162,54 @@ public class EtudiantController {
             showError("Erreur lors de l'ouverture du dialogue d'ajout : " + e.getMessage());
         }
 
+    private Button btnDashboard;
+
+    @FXML
+    private Button btnEtudiants;
+
+    @FXML
+    private Button btnInscriptions;
+
+    @FXML
+    private Button btnLogout;
+
+    @FXML
+    private Button btnModules;
+
+    @FXML
+    private Button btnProfesseurs;
+
+    @FXML
+    private Button btnUtilisateurs;
+
+    @FXML
+    void handleDashboardAction(ActionEvent event) {
+
     }
 
     @FXML
+    void handleEtudiantsAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleInscriptionsAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleLogoutAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleModulesAction(ActionEvent event) {
+
+
+    }
+
+    @FXML
+
     private void handleModifyStudent() {
         Optional<Etudiant> selectedStudent = getSelectedStudent();
         if (selectedStudent.isEmpty()) {
@@ -252,5 +299,31 @@ public class EtudiantController {
             e.printStackTrace();
         }
     }
+
+
+    void handleProfesseursAction(ActionEvent event) {
+
+    }
+
+    private EtudiantService etudiantService;
+
+
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the FXML file has been loaded.
+     */
+    @FXML
+    private void initialize() {
+        // Initialize DAO implementations
+        EtudiantDAO etudiantDAO = new EtudiantDAOImpl();
+        InscriptionDAO inscriptionDAO = new InscriptionDAOImpl();
+
+        // Initialize services with DAO instances
+        this.etudiantService = new EtudiantService(etudiantDAO, inscriptionDAO);
+
+    }
+
+
+
 
 }

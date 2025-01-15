@@ -4,6 +4,7 @@ import server.projectfinal.DAO.InscriptionDAO;
 import server.projectfinal.Models.Etudiant;
 import server.projectfinal.Models.Inscription;
 import server.projectfinal.Utils.DBConnection;
+import java.sql.ResultSet;
 
 import java.sql.*;
 import java.util.List;

@@ -140,5 +140,60 @@ public class DashboardController {
         lineChartModulesProf.getData().add(series);
     }
 
+    /**
+     * Handles the action when the "Tableau de bord" button is clicked.
+     *
+     * @param event the action event
+     */
+    @FXML
+    private void handleDashboardAction(ActionEvent event) {
+        // Already on Dashboard, optionally refresh data
+        loadDashboardData();
+    }
 
+
+    /**
+     * Loads a new view into the center of the BorderPane.
+     *
+     * @param fxml the FXML file to load
+     */
+    private void loadView(String fxml) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/server/projectfinal/Views/" + fxml));
+            Parent view = loader.load();
+            borderPane.setCenter(view);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Failed to load view: " + fxml);
+        }
+    }
+
+    @FXML
+    private void handleEtudiantsAction(ActionEvent event) {
+        loadView("etudiant-view.fxml");
+    }
+
+    @FXML
+    private void handleProfesseursAction(ActionEvent event) {
+        loadView("professeur-view.fxml");
+    }
+
+    @FXML
+    private void handleModulesAction(ActionEvent event) {
+        loadView("module-view.fxml");
+    }
+
+    @FXML
+    private void handleInscriptionsAction(ActionEvent event) {
+        loadView("dialog/inscription-view.fxml");
+    }
+
+    @FXML
+    private void handleLogoutAction(ActionEvent event) {
+        // Go back to login screen
+        loadView("login-view.fxml");
+    }
+
+
+  
 }
