@@ -87,9 +87,24 @@ public class InscriptionDAOImpl implements InscriptionDAO {
         }
     }
 
-    @Override
+    /*@Override
     public ResultSet load() {
         String query = "SELECT * FROM inscriptions";
+        try {
+            Statement statement = connection.createStatement();
+            return statement.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }*/
+
+    @Override
+    public ResultSet load() {
+        String query = "SELECT i.id, e.nom AS etudiantNom, m.nomModule AS moduleNom, i.dateInscription " +
+                "FROM inscriptions i " +
+                "JOIN etudiants e ON i.etudiantId = e.id " +
+                "JOIN modules m ON i.moduleId = m.id";
         try {
             Statement statement = connection.createStatement();
             return statement.executeQuery(query);
@@ -133,7 +148,7 @@ public class InscriptionDAOImpl implements InscriptionDAO {
 
     @Override
     public List<Modul> findModulesByEtudiantId(int etudiantId) {
-        String query = "SELECT m.* FROM moduls m JOIN inscriptions i ON m.id = i.moduleId WHERE i.etudiantId = ?";
+        String query = "SELECT m.* FROM modules m JOIN inscriptions i ON m.id = i.moduleId WHERE i.etudiantId = ?";
         List<Modul> modules = new ArrayList<>();
         try (PreparedStatement pst = connection.prepareStatement(query)) {
             pst.setInt(1, etudiantId);

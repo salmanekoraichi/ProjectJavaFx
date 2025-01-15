@@ -1,5 +1,6 @@
 package server.projectfinal.Controllers;
 
+
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
@@ -9,68 +10,45 @@ import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import server.projectfinal.DAO.*;
 import server.projectfinal.Services.DashboardService;
 import server.projectfinal.Services.EtudiantService;
-import server.projectfinal.Services.ProfesseurService;
 import server.projectfinal.Services.InscriptionsService;
-import server.projectfinal.DAO.EtudiantDAO;
-import server.projectfinal.DAO.EtudiantDAOImpl;
-import server.projectfinal.DAO.ProfesseurDAO;
-import server.projectfinal.DAO.ProfesseurDAOImpl;
-import server.projectfinal.DAO.InscriptionDAO;
-import server.projectfinal.DAO.InscriptionDAOImpl;
+import server.projectfinal.Services.ProfesseurService;
 
-import java.io.IOException;
 import java.util.Map;
 
 /**
- * Controller class for the Dashboard view.
- * Handles initialization and user interactions.
- */
+ * This code is written by Salmane Koraichi
+ **/
 public class DashboardController {
-
     @FXML
-    private Label lblTotalEtudiants;
-
-    @FXML
-    private Label lblTotalProfesseurs;
-
-    @FXML
-    private Label lblTotalModules;
-
-    @FXML
-    private Label lblTotalInscriptions;
-
-    @FXML
-    private LineChart<String, Number> lineChartDonneesEtudiants;
+    private AnchorPane SceneContainer;
 
     @FXML
     private BarChart<String, Number> barChartInscriptionsAnnee;
 
     @FXML
+    private Label lblTotalEtudiants;
+
+    @FXML
+    private Label lblTotalInscriptions;
+
+    @FXML
+    private Label lblTotalModules;
+
+    @FXML
+    private Label lblTotalProfesseurs;
+
+    @FXML
+    private LineChart<String, Number> lineChartDonneesEtudiants;
+
+    @FXML
     private LineChart<String, Number> lineChartModulesProf;
 
-    @FXML
-    private Button btnDashboard;
 
-    @FXML
-    private Button btnEtudiants;
-
-    @FXML
-    private Button btnProfesseurs;
-
-    @FXML
-    private Button btnModules;
-
-    @FXML
-    private Button btnInscriptions;
-
-    @FXML
-    private Button btnLogout;
-
-    @FXML
-    private BorderPane borderPane;
 
     private DashboardService dashboardService;
     private EtudiantService etudiantService;
@@ -217,4 +195,5 @@ public class DashboardController {
     }
 
 
+  
 }

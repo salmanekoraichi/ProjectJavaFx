@@ -53,4 +53,11 @@ public class Modul {
     public void setProfesseurId(int professeurId) {
         this.professeurId = professeurId;
     }
+
+    @Override
+    public String toString() {
+        return "Modul{" +
+                "nomModule='" + nomModule + '\'' +
+                '}';
+    }
 }

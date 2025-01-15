@@ -9,11 +9,16 @@ import javafx.scene.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 import server.projectfinal.Models.Utilisateur;
 import server.projectfinal.Services.UtilisateurService;
 
+import javax.print.attribute.standard.Media;
 import java.io.IOException;
+
+import static server.projectfinal.Utils.PopupNotification.showErrorAlert;
+import static server.projectfinal.Utils.PopupNotification.showSuccess;
 
 public class LoginView {
     @FXML
@@ -36,6 +41,7 @@ public class LoginView {
 
         Utilisateur utilisateur = authController.login(username, password);
         if (utilisateur != null) {
+            showSuccess("Connected --- Welcome : "+username);
             redirectToDashboard(utilisateur.getRole());
         } else {
             showErrorAlert("Login failed", "Invalid username or password.");
@@ -45,9 +51,11 @@ public class LoginView {
     private void redirectToDashboard(String role) {
         // Determine the dashboard path based on the role
         String dashboardPath = switch (role) {
+
             case "admin" -> "/server/projectfinal/Views/dashboard-view.fxml";
             case "professor" -> "/server/projectfinal/Views/professeur-view.fxml";
             case "secretary" -> "/server/projectfinal/Views/secretary-dashboard.fxml";
+
             default -> null;
         };
 
@@ -58,9 +66,24 @@ public class LoginView {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource(dashboardPath));
                 Parent root = loader.load();
 
+                if(role.equals("professor")) {
+                    ProfesseurDashboardController controller = loader.getController();
+                    controller.setUsernamee(usernameField.getText());
+                }
+
                 // Set the new scene
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
+
+                // Set to fullscreen
+                stage.setFullScreen(true);
+
+                // Optional: Enable exiting fullscreen with the ESC key
+                stage.setFullScreenExitHint("Press ESC to exit fullscreen");
+                stage.setFullScreenExitKeyCombination(KeyCombination.valueOf("ESCAPE"));
+
+
+
                 stage.show();
             } catch (IOException e) {
                 showErrorAlert("Error", "Failed to load dashboard for role: " + role);
@@ -72,12 +95,5 @@ public class LoginView {
     }
 
 
-    private void showErrorAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }
 

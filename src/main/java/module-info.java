@@ -2,7 +2,11 @@ module server.projectfinal {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
-
+    requires java.desktop;
+    requires itextpdf;
+    requires java.sql.rowset;
+    requires java.net.http;
+    requires com.google.gson;
 
     opens server.projectfinal to javafx.fxml;
     exports server.projectfinal;

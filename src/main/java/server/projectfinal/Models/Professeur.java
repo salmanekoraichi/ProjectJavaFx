@@ -8,6 +8,7 @@ public class Professeur {
     private String nom;
     private String prenom;
     private String specialite;
+    private String Username;
 
     public Professeur() {
     }
@@ -17,6 +18,7 @@ public class Professeur {
         this.specialite = specialite;
         this.nom = nom;
         this.prenom = prenom;
+        setUsername(); // Generate username after setting nom and prenom
     }
 
     public int getId() {
@@ -51,14 +53,19 @@ public class Professeur {
         this.specialite = specialite;
     }
 
+    public String getUsername() {
+        return Username;
+    }
+    public void setUsername (){
+        Username = this.nom+"."+this.prenom;
+    }
+
+
     @Override
     public String toString() {
-        return "Professeur{" +
-                "id=" + id +
+        return "id=" + id +
                 ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", specialite='" + specialite + '\'' +
-                '}';
+                ", prenom='" + prenom + '\'';
     }
 
 }

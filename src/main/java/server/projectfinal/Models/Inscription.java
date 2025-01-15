@@ -54,11 +54,7 @@ public class Inscription {
 
     @Override
     public String toString() {
-        return "Inscription{" +
-                "id=" + id +
-                ", etudiantId=" + etudiantId +
-                ", moduleId=" + moduleId +
-                ", dateInscription='" + dateInscription + '\'' +
-                '}';
+        return "etudiantId=" + etudiantId +
+                ", moduleId=" + moduleId;
     }
 }

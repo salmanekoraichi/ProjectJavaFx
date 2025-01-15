@@ -35,6 +35,36 @@ public class ProfesseurDAOImpl implements ProfesseurDAO {
     }
 
     @Override
+    public int findidbyusername(String username) {
+        String query = "SELECT id FROM professeurs WHERE username = ?";
+        try (PreparedStatement pst = connection.prepareStatement(query)) {
+            pst.setString(1, username);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    @Override
+    public Professeur findByUsername(String Username) {
+        String query = "SELECT * FROM professeurs WHERE Username = ?";
+        try (PreparedStatement pst = connection.prepareStatement(query)) {
+            pst.setString(1, Username);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return new Professeur(rs.getInt("id"), rs.getString("specialite"), rs.getString("nom"), rs.getString("prenom"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public List<Professeur> findAll() {
         String query = "SELECT * FROM professeurs";
         List<Professeur> professeurs = new ArrayList<>();
@@ -50,11 +80,13 @@ public class ProfesseurDAOImpl implements ProfesseurDAO {
 
     @Override
     public void save(Professeur professeur) {
-        String query = "INSERT INTO professeurs (specialite, nom, prenom) VALUES (?, ?, ?)";
+        String query = "INSERT INTO professeurs (specialite, nom, prenom , username ) VALUES (?, ?, ? , ?)";
         try (PreparedStatement pst = connection.prepareStatement(query)) {
             pst.setString(1, professeur.getSpecialite());
             pst.setString(2, professeur.getNom());
             pst.setString(3, professeur.getPrenom());
+            pst.setString(4, professeur.getUsername());
+
             pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,12 +95,15 @@ public class ProfesseurDAOImpl implements ProfesseurDAO {
 
     @Override
     public void update(Professeur professeur) {
-        String query = "UPDATE professeurs SET specialite = ?, nom = ?, prenom = ? WHERE id = ?";
+        String query = "UPDATE professeurs SET specialite = ?, nom = ?, prenom = ? , username=? WHERE id = ?";
         try (PreparedStatement pst = connection.prepareStatement(query)) {
             pst.setString(1, professeur.getSpecialite());
             pst.setString(2, professeur.getNom());
             pst.setString(3, professeur.getPrenom());
-            pst.setInt(4, professeur.getId());
+            pst.setString(4, professeur.getUsername());
+
+
+            pst.setInt(5, professeur.getId());
             pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,7 +135,7 @@ public class ProfesseurDAOImpl implements ProfesseurDAO {
 
     @Override
     public List<Modul> findModulesByProfesseurId(int professeurId) {
-        String query = "SELECT * FROM moduls WHERE professeurId = ?";
+        String query = "SELECT * FROM modules WHERE professeurId = ?";
         List<Modul> modules = new ArrayList<>();
         try (PreparedStatement pst = connection.prepareStatement(query)) {
             pst.setInt(1, professeurId);
@@ -113,5 +148,18 @@ public class ProfesseurDAOImpl implements ProfesseurDAO {
         }
         return modules;
     }
+
+    public ResultSet getMdsbyid(int id){
+        String query = "SELECT * FROM modules WHERE professeurId = ?";
+        try (PreparedStatement pst = connection.prepareStatement(query)) {
+            pst.setInt(1, id);
+            return pst.executeQuery(); // Returning the ResultSet without closing it prematurely
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 
 }
